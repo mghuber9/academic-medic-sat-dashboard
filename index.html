@@ -314,6 +314,32 @@
       padding:8px 0;
       border-top:1px solid #ECEFFF;
     }
+
+        .assignment-overdue{
+      background: rgba(220, 53, 69, 0.08);
+      border-left: 4px solid #dc3545;
+      padding-left: 10px;
+      border-radius: 8px;
+    }
+
+    .assignment-overdue .assignment-title{
+      color: #a61e2c;
+      font-weight: 700;
+    }
+
+    .assignment-status-overdue{
+      display:inline-block;
+      margin-top:4px;
+      font-size:12px;
+      font-weight:700;
+      color:#a61e2c;
+      background:rgba(220, 53, 69, 0.12);
+      border:1px solid rgba(220, 53, 69, 0.35);
+      border-radius:999px;
+      padding:2px 8px;
+    }
+
+    
     .assignment-item:first-child{
       border-top:none;
     }
@@ -1060,6 +1086,22 @@ visible.slice(0,5).forEach(item => {
           const li = document.createElement('li');
           li.className = 'assignment-item';
 
+           const today = new Date();
+today.setHours(0,0,0,0);
+
+let isOverdue = false;
+if (!item.completed && item.due_date_human) {
+  const parsedDue = new Date(item.due_date_human);
+  if (!isNaN(parsedDue.getTime())) {
+    parsedDue.setHours(0,0,0,0);
+    if (parsedDue < today) {
+      isOverdue = true;
+      li.classList.add('assignment-overdue');
+    }
+  }
+} 
+  
+
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
           checkbox.className = 'assignment-checkbox';
@@ -1106,6 +1148,8 @@ if (hasScore){
   parts.push('Score: ' + item.score);
 } else if (item.completed){
   parts.push('Submitted — awaiting grade');
+} else if (isOverdue){
+  parts.push('Overdue');
 }
 
 metaEl.textContent = parts.join(' · ');
@@ -1113,6 +1157,14 @@ metaEl.textContent = parts.join(' · ');
 
           textWrap.appendChild(titleEl);
           textWrap.appendChild(metaEl);
+
+          if (isOverdue) {
+  const overdueBadge = document.createElement('div');
+  overdueBadge.className = 'assignment-status-overdue';
+  overdueBadge.textContent = 'Overdue';
+  textWrap.appendChild(overdueBadge);
+}
+  
 
           li.appendChild(checkbox);
           li.appendChild(textWrap);
