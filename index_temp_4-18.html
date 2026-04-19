@@ -339,6 +339,30 @@
       padding:2px 8px;
     }
 
+    .assignment-due-today{
+  background: rgba(233, 180, 76, 0.14);
+  border-left: 4px solid #E9B44C;
+  padding-left: 10px;
+  border-radius: 8px;
+}
+
+.assignment-due-today .assignment-title{
+  color: #7a5712;
+  font-weight: 700;
+}
+
+.assignment-status-due-today{
+  display:inline-block;
+  margin-top:4px;
+  font-size:12px;
+  font-weight:700;
+  color:#7a5712;
+  background:rgba(233, 180, 76, 0.22);
+  border:1px solid rgba(122, 87, 18, 0.28);
+  border-radius:999px;
+  padding:2px 8px;
+}
+
     
     .assignment-item:first-child{
       border-top:none;
@@ -1090,16 +1114,22 @@ visible.slice(0,5).forEach(item => {
 today.setHours(0,0,0,0);
 
 let isOverdue = false;
+let isDueToday = false;
+
 if (!item.completed && item.due_date_human) {
   const parsedDue = new Date(item.due_date_human);
   if (!isNaN(parsedDue.getTime())) {
     parsedDue.setHours(0,0,0,0);
+
     if (parsedDue < today) {
       isOverdue = true;
       li.classList.add('assignment-overdue');
+    } else if (parsedDue.getTime() === today.getTime()) {
+      isDueToday = true;
+      li.classList.add('assignment-due-today');
     }
   }
-} 
+}
   
 
           const checkbox = document.createElement('input');
