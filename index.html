@@ -164,13 +164,13 @@
       margin-bottom:10px;
     }
     .progress-row{
-      margin:10px auto;
-      display:grid;
-      grid-template-columns:minmax(0,110px) 1fr minmax(0,200px);
-      gap:12px;
-      align-items:center;
-      font-size:14px;
-    }
+  margin:28px auto;  /* more vertical spacing */
+  display:grid;
+  grid-template-columns:minmax(0,110px) 1fr minmax(0,200px);
+  gap:12px;
+  align-items:center;
+  font-size:14px;
+}
     .progress-label{
       font-weight:700;
       color:#1F2330;
@@ -182,12 +182,56 @@
       font-size:13px;
     }
     .progress-track{
-      position:relative;
-      height:14px;
-      border-radius:999px;
-      background:#D7DBF0;
-      overflow:hidden;
-    }
+  position:relative;
+  height:14px;
+  border-radius:999px;
+  background:#D7DBF0;
+  overflow:visible;
+}
+    .progress-marker{
+  position:absolute;
+  top:-6px;
+  width:2px;
+  height:26px;
+  background:#1F2330;
+  opacity:0.7;
+}
+
+.progress-marker.baseline{
+  background:#555;
+}
+
+.progress-marker.current{
+  background:#1c7ed6;
+  width:3px;
+}
+.progress-marker-label{
+  opacity:0.75;
+}
+
+.progress-marker.current + .progress-marker-label{
+  font-size:12px;
+  font-weight:900;
+  opacity:1;
+  color:#1c7ed6;
+}    
+
+.progress-marker.goal{
+  background:#2b8a3e;
+}
+
+.progress-marker-label{
+  position:absolute;
+  top:22px;
+  transform:translateX(-50%);
+  font-size:11px;
+  font-weight:700;
+  color:#1F2330;
+  background:#FFFFFF;
+  padding:1px 4px;
+  border-radius:4px;
+  white-space:nowrap;
+}
     .progress-fill{
       position:absolute;
       inset:0;
@@ -338,6 +382,30 @@
       border-radius:999px;
       padding:2px 8px;
     }
+
+    .assignment-due-today{
+  background: rgba(233, 180, 76, 0.14);
+  border-left: 4px solid #E9B44C;
+  padding-left: 10px;
+  border-radius: 8px;
+}
+
+.assignment-due-today .assignment-title{
+  color: #7a5712;
+  font-weight: 700;
+}
+
+.assignment-status-due-today{
+  display:inline-block;
+  margin-top:4px;
+  font-size:12px;
+  font-weight:700;
+  color:#7a5712;
+  background:rgba(233, 180, 76, 0.22);
+  border:1px solid rgba(122, 87, 18, 0.28);
+  border-radius:999px;
+  padding:2px 8px;
+}
 
     
     .assignment-item:first-child{
@@ -632,11 +700,35 @@
         left.textContent = label;
 
         var track = document.createElement("div");
-        track.className = "progress-track";
-        var fill = document.createElement("div");
-        fill.className = "progress-fill";
-        fill.style.width = pct + "%";
-        track.appendChild(fill);
+track.className = "progress-track";
+
+var fill = document.createElement("div");
+fill.className = "progress-fill";
+fill.style.width = pct + "%";
+track.appendChild(fill);
+
+// --- NEW: markers ---
+
+function createMarker(positionPct, label, className){
+  var marker = document.createElement("div");
+  marker.className = "progress-marker " + className;
+  marker.style.left = positionPct + "%";
+
+  var labelEl = document.createElement("div");
+  labelEl.className = "progress-marker-label";
+  labelEl.style.left = positionPct + "%";
+  labelEl.textContent = label;
+
+  track.appendChild(marker);
+  track.appendChild(labelEl);
+}
+
+// baseline = 0%
+// current position
+// goal = 100%
+createMarker(0, baseline, "baseline");
+createMarker(pct, current, "current");
+createMarker(100, goal, "goal");
 
         var right = document.createElement("div");
         right.className = "progress-meta";
@@ -1090,16 +1182,22 @@ visible.slice(0,5).forEach(item => {
 today.setHours(0,0,0,0);
 
 let isOverdue = false;
+let isDueToday = false;
+
 if (!item.completed && item.due_date_human) {
   const parsedDue = new Date(item.due_date_human);
   if (!isNaN(parsedDue.getTime())) {
     parsedDue.setHours(0,0,0,0);
+
     if (parsedDue < today) {
       isOverdue = true;
       li.classList.add('assignment-overdue');
+    } else if (parsedDue.getTime() === today.getTime()) {
+      isDueToday = true;
+      li.classList.add('assignment-due-today');
     }
   }
-} 
+}
   
 
           const checkbox = document.createElement('input');
@@ -1150,6 +1248,8 @@ if (hasScore){
   parts.push('Submitted — awaiting grade');
 } else if (isOverdue){
   parts.push('Overdue');
+} else if (isDueToday){
+  parts.push('Due Today');
 }
 
 metaEl.textContent = parts.join(' · ');
@@ -1163,6 +1263,11 @@ metaEl.textContent = parts.join(' · ');
   overdueBadge.className = 'assignment-status-overdue';
   overdueBadge.textContent = 'Overdue';
   textWrap.appendChild(overdueBadge);
+} else if (isDueToday) {
+  const todayBadge = document.createElement('div');
+  todayBadge.className = 'assignment-status-due-today';
+  todayBadge.textContent = 'Due Today';
+  textWrap.appendChild(todayBadge);
 }
   
 
