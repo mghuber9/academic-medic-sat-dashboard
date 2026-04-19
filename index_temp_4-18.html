@@ -1195,6 +1195,11 @@ metaEl.textContent = parts.join(' · ');
   overdueBadge.className = 'assignment-status-overdue';
   overdueBadge.textContent = 'Overdue';
   textWrap.appendChild(overdueBadge);
+} else if (isDueToday) {
+  const todayBadge = document.createElement('div');
+  todayBadge.className = 'assignment-status-due-today';
+  todayBadge.textContent = 'Due Today';
+  textWrap.appendChild(todayBadge);
 }
   
 
