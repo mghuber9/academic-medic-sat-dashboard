@@ -711,13 +711,11 @@ function createMarker(positionPct, label, className){
 }
 
 // baseline = 0%
-createMarker(0, "B", "baseline");
-
 // current position
-createMarker(pct, "C", "current");
-
 // goal = 100%
-createMarker(100, "G", "goal");
+createMarker(0, baseline, "baseline");
+createMarker(pct, current, "current");
+createMarker(100, goal, "goal");
 
         var right = document.createElement("div");
         right.className = "progress-meta";
