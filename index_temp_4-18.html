@@ -463,6 +463,48 @@
       font-size:13px;
       color:#1F2330;
     }
+
+/* Landing Section */
+.landing-section{
+  background:#FFFFFF;
+  border-bottom:2px solid var(--border);
+  padding:22px 16px 24px;
+  text-align:center;
+}
+
+.landing-inner{
+  max-width:720px;
+  margin:0 auto;
+}
+
+.landing-section h2{
+  margin:0 0 8px;
+  font-size:20px;
+  font-weight:900;
+  color:#1c2140;
+}
+
+.landing-sub{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+
+.landing-steps{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-size:14px;
+}
+
+.landing-step{
+  background:#EEF1FF;
+  border:1px dashed var(--brand);
+  border-radius:999px;
+  padding:6px 10px;
+}
+
+    
   </style>
 </head>
 <body>
@@ -477,6 +519,31 @@
   </div>
 </header>
 
+<!-- Landing Section -->
+<section class="landing-section">
+  <div class="landing-inner">
+    <h2>Welcome to Your SAT Dashboard</h2>
+    <p class="landing-sub">
+      Track your assignments, practice tests, and progress toward your SAT goal — all in one place.
+    </p>
+
+    <div class="landing-steps">
+      <div class="landing-step">
+        <strong>Step 1:</strong> Enter your Student ID and PIN
+      </div>
+      <div class="landing-step">
+        <strong>Step 2:</strong> Complete your assigned practice
+      </div>
+      <div class="landing-step">
+        <strong>Step 3:</strong> Track your progress and improve each week
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
 <!-- Next 5 Assignments / Student Login -->
 <section class="assignments-section">
   <div class="assignments-header">
