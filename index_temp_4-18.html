@@ -188,6 +188,37 @@
       background:#D7DBF0;
       overflow:hidden;
     }
+    .progress-marker{
+  position:absolute;
+  top:-6px;
+  width:2px;
+  height:26px;
+  background:#1F2330;
+  opacity:0.7;
+}
+
+.progress-marker.baseline{
+  background:#555;
+}
+
+.progress-marker.current{
+  background:#1c7ed6;
+  width:3px;
+}
+
+.progress-marker.goal{
+  background:#2b8a3e;
+}
+
+.progress-marker-label{
+  position:absolute;
+  top:20px;
+  transform:translateX(-50%);
+  font-size:11px;
+  font-weight:700;
+  color:#1F2330;
+  white-space:nowrap;
+}
     .progress-fill{
       position:absolute;
       inset:0;
@@ -656,11 +687,37 @@
         left.textContent = label;
 
         var track = document.createElement("div");
-        track.className = "progress-track";
-        var fill = document.createElement("div");
-        fill.className = "progress-fill";
-        fill.style.width = pct + "%";
-        track.appendChild(fill);
+track.className = "progress-track";
+
+var fill = document.createElement("div");
+fill.className = "progress-fill";
+fill.style.width = pct + "%";
+track.appendChild(fill);
+
+// --- NEW: markers ---
+
+function createMarker(positionPct, label, className){
+  var marker = document.createElement("div");
+  marker.className = "progress-marker " + className;
+  marker.style.left = positionPct + "%";
+
+  var labelEl = document.createElement("div");
+  labelEl.className = "progress-marker-label";
+  labelEl.style.left = positionPct + "%";
+  labelEl.textContent = label;
+
+  track.appendChild(marker);
+  track.appendChild(labelEl);
+}
+
+// baseline = 0%
+createMarker(0, "B", "baseline");
+
+// current position
+createMarker(pct, "C", "current");
+
+// goal = 100%
+createMarker(100, "G", "goal");
 
         var right = document.createElement("div");
         right.className = "progress-meta";
