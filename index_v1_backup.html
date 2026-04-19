@@ -1,0 +1,1475 @@
+<!-- VERSION: 1.1 | Static due dates + overdue highlighting + due today highlighting -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Academic Medic — Digital SAT Practice Dashboard</title>
+  <link rel="icon" type="image/png" href="transparent logo.png">
+  <style>
+  :root{
+    --bg:#F6F5F1;          /* warm off-white */
+    --card:#FFFFFF;        /* white cards */
+    --text:#1F2330;        /* main text */
+    --muted:#5E667D;       /* muted text */
+
+    --brand:#264E36;       /* Academic Medic green */
+    --accent:#E9B44C;      /* Academic Medic gold */
+
+    --accent-soft: rgba(233,180,76,0.18);
+--brand-soft: rgba(38,78,54,0.10);
+
+
+    --border:#D9D6CC;      /* warm border */
+    --brand-ink:#FFFFFF;   /* button text */
+  }
+
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    header{
+      padding:28px 16px;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(180deg,
+        rgba(38,78,54,0.14),
+        rgba(233,180,76,0.12) 60%,
+        transparent);
+
+        text-align:center;
+    }
+    .brand-logo{
+      display:block;
+      margin:0 auto 10px;
+      max-width:140px;
+      width:100%;
+      height:auto;
+    }
+
+    @media (max-width: 600px){
+      .brand-logo{
+        max-width:100px;
+        margin-bottom:8px;
+      }
+    }
+
+
+    h1{
+      margin:0 0 6px;
+      font-size:clamp(22px,3.2vw,34px);
+      font-family: "Times New Roman", Times, serif;
+      font-weight:700;
+      letter-spacing:0.3px;
+    }
+
+    p{margin:0;color:var(--muted)}
+    .container{max-width:1100px;margin:0 auto;padding:20px 16px 56px;}
+    .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px}
+    .spacer{flex:1}
+    button,.linklike{
+      appearance:none;
+      border:none;
+      background:var(--brand);
+      color:var(--brand-ink);
+      padding:10px 16px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 6px 14px rgba(38,78,54,0.25);
+    }
+
+    button:hover,.linklike:hover{
+      filter:brightness(1.08);
+      transform:translateY(-1px);
+    }
+
+    .sat-section{padding:22px 0 26px;border-top:2px solid var(--border)}
+    .sat-header{display:flex;align-items:baseline;gap:10px;margin:6px 0 14px}
+    .sat-title{font-size:18px;font-weight:900;color:#131729}
+    .sat-sub{font-size:12px;color:var(--muted)}
+    .sat-grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:12px}
+    @media(min-width:800px){.sat-grid{grid-template-columns:repeat(4,minmax(0,1fr));}}
+    .card{
+      background:var(--card);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:18px;
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      box-shadow:0 10px 24px rgba(17,24,39,0.08);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 30px rgba(17,24,39,0.10);
+    }
+
+    .card h3{margin:0;font-size:16px;color:#1c2140}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:12px}
+    .score{min-width:110px;font-weight:900;letter-spacing:0.2px}
+    .badge{
+  font-size:11px;
+  padding:3px 10px;
+  border-radius:999px;
+  border:1px solid var(--accent);
+  background:var(--accent-soft);
+  color:var(--brand);
+  font-weight:800;
+}
+
+    .footer{margin-top:36px;color:var(--muted);font-size:13px}
+    .totals{
+      margin-top:12px;
+      background: rgba(255,255,255,0.7);
+      border:1px solid rgba(38,78,54,0.22);
+      border-radius:14px;
+      padding:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .totals .chip{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px dashed var(--brand);
+      background:#EEF1FF;
+      font-weight:800;
+      color:#1F2330;
+    }
+    .totals label{font-size:12px;color:var(--muted);margin-right:6px;font-weight:700}
+
+    /* Progress bars (baseline -> goal) */
+    .progress-section{
+      background:linear-gradient(180deg,#FFFFFF,#EEF1FF);
+      border-bottom:2px solid var(--border);
+      padding:20px 16px 24px;
+    }
+    .progress-inner{
+      max-width:820px;
+      margin:0 auto;
+    }
+    .progress-title{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .progress-row{
+  margin:28px auto;  /* more vertical spacing */
+  display:grid;
+  grid-template-columns:minmax(0,110px) 1fr minmax(0,200px);
+  gap:12px;
+  align-items:center;
+  font-size:14px;
+}
+    .progress-label{
+      font-weight:700;
+      color:#1F2330;
+    }
+    .progress-meta{
+      text-align:right;
+      color:var(--muted);
+      white-space:nowrap;
+      font-size:13px;
+    }
+    .progress-track{
+  position:relative;
+  height:14px;
+  border-radius:999px;
+  background:#D7DBF0;
+  overflow:visible;
+}
+    .progress-marker{
+  position:absolute;
+  top:-6px;
+  width:2px;
+  height:26px;
+  background:#1F2330;
+  opacity:0.7;
+}
+
+.progress-marker.baseline{
+  background:#555;
+}
+
+.progress-marker.current{
+  background:#1c7ed6;
+  width:3px;
+}
+.progress-marker-label{
+  opacity:0.75;
+}
+
+.progress-marker.current + .progress-marker-label{
+  font-size:12px;
+  font-weight:900;
+  opacity:1;
+  color:#1c7ed6;
+}    
+
+.progress-marker.goal{
+  background:#2b8a3e;
+}
+
+.progress-marker-label{
+  position:absolute;
+  top:22px;
+  transform:translateX(-50%);
+  font-size:11px;
+  font-weight:700;
+  color:#1F2330;
+  background:#FFFFFF;
+  padding:1px 4px;
+  border-radius:4px;
+  white-space:nowrap;
+}
+    .progress-fill{
+      position:absolute;
+      inset:0;
+      width:0;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      transition:width .45s ease-out;
+    }
+
+    /* Countdown section */
+    .countdown-section{
+      background:#FFFFFF;
+      border-bottom:2px solid var(--border);
+      padding:12px 16px 16px;
+    }
+    .countdown-inner{
+      max-width:820px;
+      margin:0 auto;
+      text-align:center;
+    }
+    .countdown-title{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .countdown-main{
+      font-size:16px;
+      font-weight:700;
+      color:#1F2330;
+      margin-bottom:4px;
+    }
+    .countdown-main .dot{
+      margin:0 6px;
+      opacity:0.4;
+    }
+    .countdown-days{
+      color:var(--brand);
+    }
+    .countdown-sub{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Assignments panel */
+    .assignments-section{
+    margin:18px auto 24px;
+    padding:14px 16px 16px;
+    border:1px solid rgba(0,0,0,0.06);
+    background:#FFFFFF;
+    border:1px solid var(--border);
+    box-shadow:0 10px 24px rgba(17,24,39,0.08);
+
+    max-width:820px;
+  }
+
+    .assignments-header h2{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      color:#1c2140;
+    }
+    .assignments-header p{
+      margin:4px 0 0;
+      font-size:13px;
+    }
+    .assignments-header{
+  text-align:center;
+}
+
+    .assignments-login{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:flex-end;
+      justify-content:center;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+    .assignments-login label{
+      display:flex;
+      flex-direction:column;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .assignments-login input{
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  font-size:14px;
+  min-width:140px;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+    .assignments-login input:focus{
+  outline:none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(38,78,54,0.18);
+}
+
+    .assignments-login button{
+      padding:8px 12px;
+      border-radius:10px;
+      border:2px solid var(--brand);
+      background:var(--brand);
+      color:var(--brand-ink);
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 2px 0 rgba(0,0,0,0.1);
+    }
+    .assignments-login button:hover{
+      filter:brightness(1.05);
+    }
+    .assignments-list{
+      list-style:none;
+      padding:0;
+      margin:4px 0 0;
+    }
+    .assignment-item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:8px 0;
+      border-top:1px solid #ECEFFF;
+    }
+
+        .assignment-overdue{
+      background: rgba(220, 53, 69, 0.08);
+      border-left: 4px solid #dc3545;
+      padding-left: 10px;
+      border-radius: 8px;
+    }
+
+    .assignment-overdue .assignment-title{
+      color: #a61e2c;
+      font-weight: 700;
+    }
+
+    .assignment-status-overdue{
+      display:inline-block;
+      margin-top:4px;
+      font-size:12px;
+      font-weight:700;
+      color:#a61e2c;
+      background:rgba(220, 53, 69, 0.12);
+      border:1px solid rgba(220, 53, 69, 0.35);
+      border-radius:999px;
+      padding:2px 8px;
+    }
+
+    .assignment-due-today{
+  background: rgba(233, 180, 76, 0.14);
+  border-left: 4px solid #E9B44C;
+  padding-left: 10px;
+  border-radius: 8px;
+}
+
+.assignment-due-today .assignment-title{
+  color: #7a5712;
+  font-weight: 700;
+}
+
+.assignment-status-due-today{
+  display:inline-block;
+  margin-top:4px;
+  font-size:12px;
+  font-weight:700;
+  color:#7a5712;
+  background:rgba(233, 180, 76, 0.22);
+  border:1px solid rgba(122, 87, 18, 0.28);
+  border-radius:999px;
+  padding:2px 8px;
+}
+
+    
+    .assignment-item:first-child{
+      border-top:none;
+    }
+    .assignment-checkbox{
+      margin-top:3px;
+    }
+    .assignment-title{
+      font-size:14px;
+      font-weight:600;
+      color:#1F2330;
+    }
+    .assignment-meta{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+    .assignment-saving{
+      opacity:0.6;
+    }
+    .assignment-completed{
+      text-decoration:line-through;
+      opacity:0.5;
+    }
+
+    /* Focus tips strip */
+    .focus-strip{
+      background:#FFFFFF;
+      border-bottom:2px solid var(--border);
+      padding:14px 16px 18px;
+    }
+    .focus-title{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .focus-pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+    }
+    .focus-pill{
+      max-width:280px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#EEF1FF;
+      border:1px dashed var(--brand);
+      font-size:13px;
+      color:#1F2330;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <img src="transparent logo.png" alt="Academic Medic Study Club logo" class="brand-logo">
+    <h1 id="dashboard-title">Digital SAT Practice Tests</h1>
+    <p id="dashboard-subtitle">
+      Secure student access to practice tests, assignments, scores, and progress tracking.
+    </p>
+
+  </div>
+</header>
+
+<!-- Next 5 Assignments / Student Login -->
+<section class="assignments-section">
+  <div class="assignments-header">
+    <h2>Student Login</h2>
+    <p class="muted">Enter your Student ID and PIN to load your assignments, scores, and progress.</p>
+  </div>
+  <form id="login-form" class="assignments-login">
+    <label>
+      Student ID
+      <input type="text" id="student-id" autocomplete="username" required>
+    </label>
+    <label>
+      PIN
+      <input type="password" id="student-pin" inputmode="numeric" autocomplete="current-password" required>
+    </label>
+    <button type="submit">Log In</button>
+    <span id="login-status" class="muted"></span>
+  </form>
+
+  <h2 id="assignments-title" style="display:none; margin-top:10px;">Next 5 Assignments</h2>
+
+  
+  <ul id="assignments-list" class="assignments-list"></ul>
+</section>
+
+<section class="footer" style="text-align:center;">
+  <p class="muted" style="margin-top:10px;">
+    Powered by Academic Medic
+  </p>
+</section>
+
+
+  
+
+    <!-- Everything below is hidden until login -->
+  <div id="dashboard-content" style="display:none;">
+
+  <!-- Progress bars (primary goals view, baseline → goal) -->
+  <section class="progress-section">
+
+    <div class="progress-inner">
+      <div class="progress-title">Progress Toward Goal</div>
+
+      <!-- Baseline/goal/current values -->
+      <div class="progress-row"
+           data-label="Verbal"
+           data-baseline="397"
+           data-goal="570"
+           data-current="500"></div>
+
+      <div class="progress-row"
+           data-label="Math"
+           data-baseline="397"
+           data-goal="570"
+           data-current="500"></div>
+
+      <div class="progress-row"
+           data-label="Composite"
+           data-baseline="994"
+           data-goal="1140"
+           data-current="1000"></div>
+    </div>
+  </section>
+
+  <!-- Upcoming SAT dates (from Google Sheet) + student's planned date -->
+  <section class="countdown-section">
+    <div class="countdown-inner">
+      <div class="countdown-title">Upcoming SAT Test Dates</div>
+      <div id="sat-upcoming-list"></div>
+
+      <div class="countdown-sub" id="sat-planned-line" style="margin-top:8px;">
+        Your planned test date:
+        <span id="sat-planned-date" class="countdown-days">Not set yet</span>
+        <br>
+        <label for="planned-date-input" style="font-size:0.9em;">Change date:</label>
+        <select id="planned-date-input" style="margin-left:4px; font-size:0.9em;">
+          <option value="">Select a test date…</option>
+        </select>
+        <button type="button" id="planned-date-save" style="margin-left:4px; font-size:0.9em;">Save</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Random focus tips -->
+  <section class="focus-strip">
+    <div class="focus-title">Today&apos;s Focus</div>
+    <div id="focus-pills" class="focus-pill-row"></div>
+  </section>
+
+  <!-- Zoom banner -->
+  <section style="background:#EEF1FF;padding:12px 16px;border-bottom:1px solid #D7DBF0;text-align:center;">
+    <a href="https://us06web.zoom.us/j/7612376123" target="_blank"
+       style="font-weight:700;color:#6A8CFF;text-decoration:none;font-size:16px;">
+      Join Zoom Meeting
+    </a>
+    <div style="margin-top:4px;font-size:14px;color:#1F2330;">
+      Passcode: <strong>728586</strong>
+    </div>
+  </section>
+
+  <!-- Desmos banner -->
+  <section style="background:#EEF1FF;padding:12px 16px;border-bottom:1px solid #D7DBF0;text-align:center;">
+    <a href="https://www.desmos.com/testing/cb-sat-ap/graphing"
+       onclick="window.open(this.href,'desmos','popup=yes,width=1200,height=800,left=120,top=80,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes,resizable=yes');return false;"
+       style="font-weight:700;color:#6A8CFF;text-decoration:none;font-size:16px;">
+      Open Desmos Calculator
+    </a>
+  </section>
+
+  <main class="container">
+    <div class="toolbar">
+      <span class="spacer"></span>
+      <button onclick="window.print()">Print</button>
+    </div>
+
+    <div id="wrap"></div>
+
+  <section class="footer" style="text-align:center;">
+    <p class="muted" style="margin-top:10px;">
+      Powered by Academic Medic
+    </p>
+  </section>
+
+
+  </main>
+  </div> <!-- end #dashboard-content -->
+
+  <!-- ===== Shared Scores Configuration ===== -->
+  <script id="SHARED_SCORES" type="application/json">
+  {
+    "SAT 1": {
+      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+    },
+    "SAT 2": {
+      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+    },
+    "SAT 3": {
+      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+    },
+    "SAT 4": {
+      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+    },
+    "SAT 5": {
+      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+    },
+    "SAT 6": {
+      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+    }
+  }
+  </script>
+
+  <!-- Main SAT / progress logic -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function(){
+
+    /* -------- Focus tips ------- */
+    var FOCUS_TIPS = [
+      'Review why you missed, not just what you missed.',
+      'Study 20 focused minutes daily > 3 hours once a week.',
+      'Track your errors by type (concept, careless, time).',
+      'Build your own SAT “mistake journal.”',
+      'Re-solve missed questions a week later to test retention.',
+      'Simulate test timing at least twice before test day.',
+      'Use the same calculator you’ll bring to the test.',
+      'Set micro-goals: “I’ll master one skill this session.”',
+      'Talk through a problem out loud as if teaching it.',
+      'Revisit easy wins to build confidence before tough sets.',
+      'Study in the same posture/environment you’ll test in.',
+      'Keep a simple checklist for test day (ID, calculator, snacks).',
+      'Don’t aim for perfect—aim for a little better than last week.',
+      'Review your wrong answers before closing your notebook.',
+      'Predict answers before looking at choices.',
+      'Reward consistency, not perfection.'
+    ];
+
+    var focusWrap = document.getElementById("focus-pills");
+    if (focusWrap) {
+      var pool = FOCUS_TIPS.slice();
+      var count = Math.min(3, pool.length);
+      for (var i = 0; i < count; i++) {
+        var idx = Math.floor(Math.random() * pool.length);
+        var tip = pool.splice(idx, 1)[0];
+        var pill = document.createElement("div");
+        pill.className = "focus-pill";
+        pill.textContent = tip;
+        focusWrap.appendChild(pill);
+      }
+    }
+
+    /* -------- Progress bars (baseline → goal) -------- */
+    function buildProgress(){
+      var rows = document.querySelectorAll(".progress-row");
+      (rows.forEach || Array.prototype.forEach).call(rows, function(row){
+        var label    = row.getAttribute("data-label")    || "";
+        var baseline = parseInt(row.getAttribute("data-baseline"), 10);
+        var goal     = parseInt(row.getAttribute("data-goal"), 10);
+        var current  = parseInt(row.getAttribute("data-current"), 10);
+
+        if (isNaN(baseline)) baseline = 0;
+        if (!goal || goal <= baseline) goal = baseline + 1;
+        if (isNaN(current)) current = baseline;
+
+        // clamp between baseline and goal
+        if (current < baseline) current = baseline;
+        if (current > goal)     current = goal;
+
+        var span   = goal - baseline;
+        var gained = current - baseline;
+        var pct    = Math.round((gained / span) * 100);
+
+        row.innerHTML = "";
+
+        var left = document.createElement("div");
+        left.className = "progress-label";
+        left.textContent = label;
+
+        var track = document.createElement("div");
+track.className = "progress-track";
+
+var fill = document.createElement("div");
+fill.className = "progress-fill";
+fill.style.width = pct + "%";
+track.appendChild(fill);
+
+// --- NEW: markers ---
+
+function createMarker(positionPct, label, className){
+  var marker = document.createElement("div");
+  marker.className = "progress-marker " + className;
+  marker.style.left = positionPct + "%";
+
+  var labelEl = document.createElement("div");
+  labelEl.className = "progress-marker-label";
+  labelEl.style.left = positionPct + "%";
+  labelEl.textContent = label;
+
+  track.appendChild(marker);
+  track.appendChild(labelEl);
+}
+
+// baseline = 0%
+// current position
+// goal = 100%
+createMarker(0, baseline, "baseline");
+createMarker(pct, current, "current");
+createMarker(100, goal, "goal");
+
+        var right = document.createElement("div");
+        right.className = "progress-meta";
+        right.textContent =
+          baseline + " → " + current + " / " + goal +
+          " (+" + gained + " from baseline)";
+
+        row.appendChild(left);
+        row.appendChild(track);
+        row.appendChild(right);
+      });
+    }
+
+    window.buildProgress = buildProgress;
+
+
+    /* -------- Countdown to next SAT -------- */
+
+
+
+
+
+    
+    buildProgress();
+    // setupCountdown();  // no longer needed; dates come from the server now
+
+
+    /* -------- SAT links and scores rendering -------- */
+    var DEFAULT_LINKS = {
+      "SAT 1": {
+        "Math Module 1": "https://www.zipgrade.com/s/h4nlr0u/",
+        "Math Module 2": "https://www.zipgrade.com/s/tk1i4pm/",
+        "R&W Module 1": "https://www.zipgrade.com/s/0IipBD8/",
+        "R&W Module 2": "https://www.zipgrade.com/s/RtgiO6W/"
+      },
+      "SAT 2": { "Math Module 1": "#", "Math Module 2": "#", "R&W Module 1": "#", "R&W Module 2": "#" },
+      "SAT 3": { "Math Module 1": "#", "Math Module 2": "#", "R&W Module 1": "#", "R&W Module 2": "#" },
+      "SAT 4": { "Math Module 1": "#", "Math Module 2": "#", "R&W Module 1": "#", "R&W Module 2": "#" },
+      "SAT 5": { "Math Module 1": "#", "Math Module 2": "#", "R&W Module 1": "#", "R&W Module 2": "#" },
+      "SAT 6": { "Math Module 1": "#", "Math Module 2": "#", "R&W Module 1": "#", "R&W Module 2": "#" }
+    };
+
+    function getSharedScores(){
+      try{
+        var json = document.getElementById("SHARED_SCORES").textContent;
+        return JSON.parse(json);
+      }catch(e){
+        console.warn("Could not parse SHARED_SCORES JSON:", e);
+        return {};
+      }
+    }
+
+    var wrap = document.getElementById("wrap");
+    var links = DEFAULT_LINKS;
+    var sharedScores = getSharedScores();
+
+    render();
+
+    function render(){
+      wrap.innerHTML = "";
+      var tests = Object.keys(links).sort(function(a,b){
+        return (+a.split(" ")[1]) - (+b.split(" ")[1]);
+      });
+      tests.forEach(function(testName){
+        wrap.appendChild(section(testName));
+      });
+    }
+
+    function section(testName){
+      var sec = el("section", {class:"sat-section"});
+      var header = el("div", {class:"sat-header"});
+      header.append(
+        el("div", {class:"sat-title"}, testName),
+        el("div", {class:"sat-sub"}, "Modules & composites")
+      );
+      sec.append(header);
+
+      var grid = el("div", {class:"sat-grid"});
+      ["Math Module 1","Math Module 2","R&W Module 1","R&W Module 2"].forEach(function(mod){
+        grid.append(card(testName, mod, links[testName][mod]));
+      });
+      sec.append(grid);
+
+      var totals = el("div", {class:"totals"});
+      totals.append(
+        totalChip("Composite Math", scoreOf(testName,"Composite Math")),
+        totalChip("Composite Verbal", scoreOf(testName,"Composite Verbal")),
+        totalChip("Overall", scoreOf(testName,"Overall"))
+      );
+      sec.append(totals);
+
+      return sec;
+    }
+
+    function totalChip(label, value){
+      var chip = el("div", {class:"chip"});
+      var l = el("label", {}, label + ":");
+      var v = el("span", {class:"score", title:"Edit in SCORES JSON"}, value || "—");
+      chip.append(l, v);
+      return chip;
+    }
+
+    function scoreOf(testName, key){
+      var ts = sharedScores && sharedScores[testName];
+      return (ts && ts[key]) ? ts[key] : "—";
+    }
+
+    function card(testName, moduleName, url){
+      var card = el("div", {class:"card"});
+      var header = el("div", {class:"row"});
+      header.append(el("h3", {}, moduleName));
+      card.append(header);
+
+      var row1 = el("div", {class:"row"});
+      var link = el("a", {
+        class:"linklike",
+        href:url || "#",
+        target:"_blank",
+        rel:"noopener noreferrer"
+      }, "Open Test");
+      row1.append(link);
+      card.append(row1);
+
+      var row2 = el("div", {class:"row"});
+      var ts = sharedScores && sharedScores[testName];
+      var val = (ts && ts[moduleName]) ? ts[moduleName] : "—";
+      var score = el("span", {class:"score", title:"Edit in SCORES JSON"}, val);
+      row2.append(score, el("span", {class:"muted"}, "Shared (from HTML)"));
+      card.append(row2);
+
+      return card;
+    }
+
+    function el(tag, attrs, text){
+      if (!attrs) attrs = {};
+      var n = document.createElement(tag);
+      Object.keys(attrs).forEach(function(k){ n.setAttribute(k, attrs[k]); });
+      if (text != null) n.append(document.createTextNode(text));
+      return n;
+    }
+
+    // ===== NEW: update SAT 1–6 scores from server assignments =====
+    // It expects an array like: [{ assignment_id: "SAT1_M1", score: 570 }, ...]
+    window.updateScoresFromServer = function(assignments){
+      if (!Array.isArray(assignments)) return;
+
+      // 1) Update individual module scores
+      assignments.forEach(function(item){
+        var id    = (item && item.assignment_id) || "";
+        var score = item && item.score;
+
+        if (!id || score === undefined || score === null || score === "") return;
+
+        var m = /^SAT(\d+)_(M1|M2|RW1|RW2)$/.exec(id);
+        if (!m) return;
+
+        var satNum = m[1];
+        var code   = m[2];
+
+        var testName   = "SAT " + satNum;
+        var moduleName = null;
+        if (code === "M1")  moduleName = "Math Module 1";
+        if (code === "M2")  moduleName = "Math Module 2";
+        if (code === "RW1") moduleName = "R&W Module 1";
+        if (code === "RW2") moduleName = "R&W Module 2";
+        if (!moduleName) return;
+
+        if (!sharedScores[testName]) sharedScores[testName] = {};
+        sharedScores[testName][moduleName] = String(score);
+      });
+
+      // 2) Compute composites
+      function num(val){
+        var n = parseFloat(val);
+        return isNaN(n) ? null : n;
+      }
+
+      Object.keys(sharedScores || {}).forEach(function(testName){
+        var ts = sharedScores[testName] || {};
+
+        var m1  = num(ts["Math Module 1"]);
+        var m2  = num(ts["Math Module 2"]);
+        var rw1 = num(ts["R&W Module 1"]);
+        var rw2 = num(ts["R&W Module 2"]);
+
+        // Composite Math: sum of math modules
+        if (m1 != null && m2 != null){
+          ts["Composite Math"] = String(m1 + m2);
+        }
+
+        // Composite Verbal: sum of R&W modules
+        if (rw1 != null && rw2 != null){
+          ts["Composite Verbal"] = String(rw1 + rw2);
+        }
+
+        // Overall: Composite Math + Composite Verbal
+        var cm = num(ts["Composite Math"]);
+        var cv = num(ts["Composite Verbal"]);
+        if (cm != null && cv != null){
+          ts["Overall"] = String(cm + cv);
+        }
+      });
+
+      // 3) Rebuild SAT cards
+      render();
+
+      // 4) Update progress bars
+      updateProgressFromSharedScores();
+    };
+
+    // Use the best completed SAT to drive the progress bars
+    function updateProgressFromSharedScores(){
+      if (!sharedScores) return;
+
+      function num(val){
+        var n = parseFloat(val);
+        return isNaN(n) ? null : n;
+      }
+
+      var best = null;
+
+      Object.keys(sharedScores || {}).forEach(function(testName){
+        var ts = sharedScores[testName] || {};
+        var cm = num(ts["Composite Math"]);
+        var cv = num(ts["Composite Verbal"]);
+        if (cm == null || cv == null) return;
+
+        var total = cm + cv;
+        if (!best || total > best.total){
+          best = {
+            math: cm,
+            verbal: cv,
+            composite: total
+          };
+        }
+      });
+
+      if (!best) return;
+
+      var rows = document.querySelectorAll(".progress-row");
+      (rows.forEach || Array.prototype.forEach).call(rows, function(row){
+        var label = row.getAttribute("data-label") || "";
+        var val   = null;
+        if (label === "Verbal")      val = best.verbal;
+        else if (label === "Math")   val = best.math;
+        else if (label === "Composite") val = best.composite;
+
+        if (val != null){
+          row.setAttribute("data-current", String(val));
+        }
+      });
+
+      buildProgress();
+    }
+
+  });
+  </script>
+
+  <!-- Assignments / login script -->
+  <script>
+    const ASSIGNMENTS_API_URL = 'https://script.google.com/macros/s/AKfycbzQJBcPfXk2QRRVQpRjIQlcCjxDPXkDRm1wlR7AWoycj_X7eunvsN-T2RWINP8QTGDX/exec';
+
+    document.addEventListener('DOMContentLoaded', function(){
+      const apiUrl    = ASSIGNMENTS_API_URL;
+      const form      = document.getElementById('login-form');
+      const listEl    = document.getElementById('assignments-list');
+      const statusEl  = document.getElementById('login-status');
+      const idInput   = document.getElementById('student-id');
+      const pinInput  = document.getElementById('student-pin');
+
+      if (!form || !listEl) return;
+
+      let currentStudent = null;
+
+      form.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        const studentId = idInput.value.trim();
+        const pin       = pinInput.value.trim();
+        if (!studentId || !pin) return;
+        statusEl.textContent = 'Loading...';
+        loadAssignments(studentId, pin);
+      });
+
+      async function loadAssignments(studentId, pin){
+        try{
+          const qs = new URLSearchParams({
+            action: 'getAssignments',
+            student_id: studentId,
+            pin: pin
+          });
+          const res  = await fetch(apiUrl + '?' + qs.toString());
+          const data = await res.json();
+          console.log('API data:', data);
+
+
+          if (!res.ok || data.error){
+            statusEl.textContent = data.error || 'Error loading assignments.';
+            listEl.innerHTML = '';
+            return;
+          }
+
+currentStudent = { studentId, pin };
+statusEl.textContent = 'Showing your next assignments.';
+
+// 👇 NEW: reveal the main dashboard content
+const dash = document.getElementById('dashboard-content');
+if (dash) dash.style.display = '';
+
+// 👇 NEW: hide the login form + login header
+const loginForm = document.getElementById('login-form');
+const loginHeader = document.querySelector('.assignments-header');
+if (loginForm) loginForm.style.display = 'none';
+if (loginHeader) loginHeader.style.display = 'none';
+
+// 👇 NEW: show the "Next 5 Assignments" title
+const assignTitle = document.getElementById('assignments-title');
+if (assignTitle) assignTitle.style.display = '';
+
+
+
+// ▼ NEW: personalize header + page title
+if (data.display_name) {
+  const name = data.display_name;
+  document.getElementById('dashboard-title').textContent =
+    name + "'s Digital SAT Practice Tests";
+  document.title = name + " – Digital SAT Practice Dashboard";
+}
+
+
+// 🔹 NEW: update progress bar baselines/goals from Students sheet data
+try {
+  const rows = document.querySelectorAll('.progress-row');
+
+  const om = Number(data.official_math);
+  const ov = Number(data.official_verbal);
+  const gm = Number(data.goal_math);
+  const gv = Number(data.goal_verbal);
+
+  (rows.forEach || Array.prototype.forEach).call(rows, function(row){
+    const label = row.getAttribute('data-label') || '';
+
+    if (label === 'Math' && !isNaN(om)) {
+      const baseline = om;
+      row.setAttribute('data-baseline', String(baseline));
+      if (!isNaN(gm)) row.setAttribute('data-goal', String(gm));
+      // 👇 current = baseline → zero progress until real math scores arrive
+      row.setAttribute('data-current', String(baseline));
+
+    } else if (label === 'Verbal' && !isNaN(ov)) {
+      const baseline = ov;
+      row.setAttribute('data-baseline', String(baseline));
+      if (!isNaN(gv)) row.setAttribute('data-goal', String(gv));
+      // 👇 current = baseline → zero progress until real verbal scores arrive
+      row.setAttribute('data-current', String(baseline));
+
+    } else if (label === 'Composite' && !isNaN(om) && !isNaN(ov)) {
+      const baseline = om + ov;
+      row.setAttribute('data-baseline', String(baseline));
+      if (!isNaN(gm) && !isNaN(gv)) {
+        row.setAttribute('data-goal', String(gm + gv));
+      }
+      // 👇 current = baseline → zero progress until we have a full SAT
+      row.setAttribute('data-current', String(baseline));
+    }
+  });
+
+      // Re-draw bars with these fresh values
+      if (window.buildProgress) window.buildProgress();
+
+    } catch(e) {
+      console.error('Error updating progress baselines/goals', e);
+    }
+
+    // NEW: upcoming SAT dates from the server
+    renderUpcomingSatDates(data.sat_dates || []);
+
+// NEW: populate the planned-date dropdown from SAT_Dates
+const plannedSelect = document.getElementById('planned-date-input');
+if (plannedSelect) {
+  // Keep the first option ("Select a test date…"), clear everything else
+  plannedSelect.innerHTML = '<option value="">Select a test date…</option>';
+
+  (data.sat_dates || []).forEach(item => {
+    if (!item || !item.date_iso) return;
+    const opt = document.createElement('option');
+    opt.value = item.date_iso;
+    opt.textContent = item.label
+      ? (item.label + ' — ' + (item.date_human || item.date_iso))
+      : (item.date_human || item.date_iso);
+    plannedSelect.appendChild(opt);
+  });
+
+  // If student already has a planned date saved, select it
+  if (data.planned_test_date_iso) {
+    plannedSelect.value = data.planned_test_date_iso;
+  }
+}
+
+
+          
+
+    // NEW: student's planned test date display
+    const plannedSpan = document.getElementById('sat-planned-date');
+    if (plannedSpan) {
+      if (data.planned_test_date_human || data.planned_test_date_iso) {
+        plannedSpan.textContent = data.planned_test_date_human || data.planned_test_date_iso;
+      } else {
+        plannedSpan.textContent = 'Not set yet';
+      }
+    }
+
+    // Next 5 list
+    renderAssignments(data.assignments || []);
+
+    // Full SAT list for scorecards
+    var satList = (data.satAssignments && data.satAssignments.length)
+      ? data.satAssignments
+      : (data.assignments || []);
+
+    window.updateScoresFromServer(satList);
+
+
+        }catch(err){
+          console.error(err);
+          statusEl.textContent = 'Network error – please try again.';
+          listEl.innerHTML = '';
+        }
+      }
+
+      function renderAssignments(items){
+        listEl.innerHTML = '';
+        if (!items.length){
+          const li = document.createElement('li');
+          li.textContent = 'No upcoming assignments yet.';
+          listEl.appendChild(li);
+          return;
+        }
+
+        const visible = (items || []).filter(item => {
+  const hasScore = (item.score !== undefined && item.score !== '' && item.score != null);
+  // show if not completed OR completed but ungraded
+  return !item.completed || !hasScore;
+});
+
+visible.slice(0,5).forEach(item => {
+
+          const li = document.createElement('li');
+          li.className = 'assignment-item';
+
+           const today = new Date();
+today.setHours(0,0,0,0);
+
+let isOverdue = false;
+let isDueToday = false;
+
+if (!item.completed && item.due_date_human) {
+  const parsedDue = new Date(item.due_date_human);
+  if (!isNaN(parsedDue.getTime())) {
+    parsedDue.setHours(0,0,0,0);
+
+    if (parsedDue < today) {
+      isOverdue = true;
+      li.classList.add('assignment-overdue');
+    } else if (parsedDue.getTime() === today.getTime()) {
+      isDueToday = true;
+      li.classList.add('assignment-due-today');
+    }
+  }
+}
+  
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.className = 'assignment-checkbox';
+  if (item.completed){
+  checkbox.checked = true;
+  li.classList.add('assignment-completed');
+}
+
+
+  
+          checkbox.addEventListener('change', async function(){
+  try{
+    if (checkbox.checked){
+      // ✅ mark completed
+      await markCompleted(item.assignment_id, li, checkbox);
+    } else {
+      // ✅ undo completion
+      await undoCompleted(item.assignment_id, li, checkbox);
+    }
+  } catch(err){
+    // Revert checkbox if something fails
+    checkbox.checked = !checkbox.checked;
+    console.error(err);
+    alert((err && err.message) ? err.message : String(err));
+  }
+});
+
+
+          const textWrap = document.createElement('div');
+          const titleEl = document.createElement('div');
+          titleEl.className = 'assignment-title';
+          titleEl.textContent = item.title || '(Untitled assignment)';
+
+          const metaEl = document.createElement('div');
+          metaEl.className = 'assignment-meta';
+          const parts = [];
+if (item.due_date_human){
+  parts.push('Due: ' + item.due_date_human);
+}
+
+const hasScore = (item.score !== undefined && item.score !== '' && item.score != null);
+
+if (hasScore){
+  parts.push('Score: ' + item.score);
+} else if (item.completed){
+  parts.push('Submitted — awaiting grade');
+} else if (isOverdue){
+  parts.push('Overdue');
+} else if (isDueToday){
+  parts.push('Due Today');
+}
+
+metaEl.textContent = parts.join(' · ');
+
+
+          textWrap.appendChild(titleEl);
+          textWrap.appendChild(metaEl);
+
+          if (isOverdue) {
+  const overdueBadge = document.createElement('div');
+  overdueBadge.className = 'assignment-status-overdue';
+  overdueBadge.textContent = 'Overdue';
+  textWrap.appendChild(overdueBadge);
+} else if (isDueToday) {
+  const todayBadge = document.createElement('div');
+  todayBadge.className = 'assignment-status-due-today';
+  todayBadge.textContent = 'Due Today';
+  textWrap.appendChild(todayBadge);
+}
+  
+
+          li.appendChild(checkbox);
+          li.appendChild(textWrap);
+          listEl.appendChild(li);
+        });
+      }
+
+            // NEW: Render upcoming SAT test dates from data.sat_dates
+      function renderUpcomingSatDates(dates) {
+        const listEl = document.getElementById('sat-upcoming-list');
+        if (!listEl) return;
+
+        listEl.innerHTML = '';
+
+        if (!Array.isArray(dates) || !dates.length) {
+          const msg = document.createElement('div');
+          msg.className = 'countdown-sub';
+          msg.textContent = 'No upcoming SAT dates available.';
+          listEl.appendChild(msg);
+          return;
+        }
+
+        const today = new Date();
+
+      dates.forEach(item => {
+        const line = document.createElement('div');
+        line.className = 'countdown-main';
+
+        const dateText = item.date_human || item.date_iso || '';
+        const dateSpan = document.createElement('span');
+        dateSpan.textContent = dateText;
+
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.textContent = '•';
+
+        const daysSpan = document.createElement('span');
+        daysSpan.className = 'countdown-days';
+
+        if (item.date_iso) {
+          const testDate = new Date(item.date_iso);
+          const diffMs = testDate - today;
+          const diffDay = Math.ceil(diffMs / (1000*60*60*24));
+          if (diffDay >= 0) {
+            daysSpan.textContent = diffDay + ' day' + (diffDay === 1 ? '' : 's') + ' away';
+          } else {
+            daysSpan.textContent = 'date has passed';
+          }
+        } else {
+          daysSpan.textContent = '';
+        }
+
+        line.appendChild(dateSpan);
+        line.appendChild(dot);
+        line.appendChild(daysSpan);
+        listEl.appendChild(line);
+
+        // Optional: show registration deadline as a smaller line
+        if (item.reg_human) {
+          const regLine = document.createElement('div');
+          regLine.className = 'countdown-sub';
+          regLine.textContent = 'Registration deadline: ' + item.reg_human;
+          listEl.appendChild(regLine);
+        }
+      });
+      }
+
+      // NEW: Save planned test date to the server
+      async function savePlannedDate() {
+        const input  = document.getElementById('planned-date-input');
+        const span   = document.getElementById('sat-planned-date');
+        const status = document.getElementById('login-status');
+
+        if (!input) return;
+        const val = (input.value || '').trim();
+        if (!val) {
+          if (status) status.textContent = 'Please choose a date before saving.';
+          return;
+        }
+
+        // We stored currentStudent after login
+        if (!currentStudent || !currentStudent.studentId || !currentStudent.pin) {
+          if (status) status.textContent = 'Please log in before setting a date.';
+          return;
+        }
+
+        try {
+          if (status) status.textContent = 'Saving planned date...';
+
+          const qs = new URLSearchParams({
+          action: 'setPlannedTestDate',
+          student_id: currentStudent.studentId,
+          pin: currentStudent.pin,
+
+          // send BOTH names to match whichever the backend expects
+          planned_date: val,
+          planned_test_date: val
+        });
+
+
+          const res  = await fetch(apiUrl + '?' + qs.toString());
+          const data = await res.json();
+
+          if (!res.ok || data.error) {
+            if (status) status.textContent = data.error || 'Error saving planned date.';
+            return;
+          }
+
+          if (span) {
+            span.textContent = data.planned_test_date_human || data.planned_test_date_iso || val;
+          }
+
+          if (status) status.textContent = 'Planned test date saved.';
+
+        } catch (err) {
+          console.error(err);
+          if (status) status.textContent = 'Network error while saving planned date.';
+        }
+      }
+
+      // NEW: Hook up the Save button click
+      const plannedSaveBtn = document.getElementById('planned-date-save');
+      if (plannedSaveBtn) {
+        plannedSaveBtn.addEventListener('click', function () {
+          savePlannedDate();
+        });
+      }
+
+
+      
+      async function markCompleted(assignmentId, li, checkbox){
+
+        if (!currentStudent) return;
+        li.classList.add('assignment-saving');
+
+        try{
+          const qs = new URLSearchParams({
+            action: 'completeAssignment',
+            student_id: currentStudent.studentId,
+            pin: currentStudent.pin,
+            assignment_id: assignmentId
+          });
+          const res  = await fetch(apiUrl + '?' + qs.toString());
+          const data = await res.json();
+
+          if (!res.ok || data.error){
+            statusEl.textContent = data.error || 'Could not update assignment.';
+            li.classList.remove('assignment-saving');
+            checkbox.checked = false;
+            return;
+          }
+
+          statusEl.textContent = 'Nice work — marked complete. Waiting for grade.';
+li.classList.add('assignment-completed');
+        }catch(err){
+          console.error(err);
+          statusEl.textContent = 'Network error while updating.';
+          li.classList.remove('assignment-saving');
+          checkbox.checked = false;
+        }
+      }
+
+async function undoCompleted(assignmentId, li, checkbox){
+  if (!currentStudent) return;
+
+  li.classList.add('assignment-saving');
+
+  try{
+    const qs = new URLSearchParams({
+      action: 'uncompleteAssignment',
+      student_id: currentStudent.studentId,
+      pin: currentStudent.pin,
+      assignment_id: assignmentId
+    });
+
+    const res  = await fetch(apiUrl + '?' + qs.toString());
+    const data = await res.json();
+
+    if (!res.ok || data.error){
+      statusEl.textContent = data.error || 'Could not undo completion.';
+      li.classList.remove('assignment-saving');
+      checkbox.checked = true; // revert UI
+      return;
+    }
+
+    statusEl.textContent = 'Marked as not completed.';
+    li.classList.remove('assignment-completed');
+    li.classList.remove('assignment-saving');
+  }catch(err){
+    console.error(err);
+    statusEl.textContent = 'Network error while undoing.';
+    li.classList.remove('assignment-saving');
+    checkbox.checked = true; // revert UI
+  }
+}
+
+
+      
+    });
+  </script>
+</body>
+</html>
