@@ -1180,6 +1180,8 @@ if (hasScore){
   parts.push('Submitted — awaiting grade');
 } else if (isOverdue){
   parts.push('Overdue');
+} else if (isDueToday){
+  parts.push('Due Today');
 }
 
 metaEl.textContent = parts.join(' · ');
