@@ -1401,7 +1401,10 @@ renderAssignments(assignmentItems);
         const visible = (items || []).filter(item => {
   const hasScore = (item.score !== undefined && item.score !== '' && item.score != null);
 
-  const isCompleted = (item.completed === true || item.completed === "TRUE");
+  const isCompleted =
+    item.completed === true ||
+    item.completed === "TRUE" ||
+    (item.completed == null && hasScore);
 
   return !isCompleted || !hasScore;
 });
