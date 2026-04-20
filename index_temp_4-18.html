@@ -560,6 +560,13 @@
   font-weight:700;
 }
 
+    /* Disabled login button */
+.assignments-login button:disabled{
+  opacity:0.7;
+  cursor:not-allowed;
+  transform:none;
+  filter:none;
+}
     
     
   </style>
@@ -635,7 +642,7 @@
       PIN
       <input type="password" id="student-pin" inputmode="numeric" autocomplete="current-password" required>
     </label>
-    <button type="submit">Log In</button>
+    <button type="submit" id="login-button">Log In</button>
     <span id="login-status" class="muted"></span>
   </form>
 
@@ -1184,6 +1191,7 @@ createMarker(100, goal, "goal");
       const statusEl  = document.getElementById('login-status');
       const idInput   = document.getElementById('student-id');
       const pinInput  = document.getElementById('student-pin');
+      const loginButton = document.getElementById('login-button');
 
       if (!form || !listEl) return;
 
@@ -1194,8 +1202,16 @@ createMarker(100, goal, "goal");
         const studentId = idInput.value.trim();
         const pin       = pinInput.value.trim();
         if (!studentId || !pin) return;
-        statusEl.textContent = 'Loading...';
-        loadAssignments(studentId, pin);
+
+statusEl.textContent = 'Loading your dashboard...';
+statusEl.className = 'muted';
+
+if (loginButton) {
+  loginButton.disabled = true;
+  loginButton.textContent = 'Loading...';
+}
+
+loadAssignments(studentId, pin);
       });
 
       async function loadAssignments(studentId, pin){
@@ -1211,11 +1227,17 @@ createMarker(100, goal, "goal");
 
 
           if (!res.ok || data.error){
-            statusEl.textContent = data.error || 'Invalid Student ID or PIN. Please try again.';
-            statusEl.className = 'muted login-error';
-            listEl.innerHTML = '';
-            return;
-          }
+  statusEl.textContent = data.error || 'Invalid Student ID or PIN. Please try again.';
+  statusEl.className = 'muted login-error';
+  listEl.innerHTML = '';
+
+  if (loginButton) {
+    loginButton.disabled = false;
+    loginButton.textContent = 'Log In';
+  }
+
+  return;
+}
 
 currentStudent = { studentId, pin };
 statusEl.textContent = 'Showing your next assignments.';
@@ -1341,10 +1363,16 @@ if (plannedSelect) {
 
 
         }catch(err){
-          console.error(err);
-          statusEl.textContent = 'Network error – please try again.';
-          listEl.innerHTML = '';
-        }
+  console.error(err);
+  statusEl.textContent = 'Network error – please try again.';
+  statusEl.className = 'muted login-error';
+  listEl.innerHTML = '';
+
+  if (loginButton) {
+    loginButton.disabled = false;
+    loginButton.textContent = 'Log In';
+  }
+}
       }
 
       function renderAssignments(items){
