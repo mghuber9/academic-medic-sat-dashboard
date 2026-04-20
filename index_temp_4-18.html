@@ -567,6 +567,13 @@
   transform:none;
   filter:none;
 }
+
+/* Success (all caught up) message */
+.success-message{
+  color:#2b8a3e;
+  font-weight:700;
+}
+    
     
     
   </style>
@@ -1381,6 +1388,15 @@ if (plannedSelect) {
   const li = document.createElement('li');
   li.className = 'empty-message';
   li.textContent = 'No assignments have been added yet. Please check back soon.';
+  listEl.appendChild(li);
+  return;
+}
+
+// NEW: check for "all caught up"
+if (visible.length === 0){
+  const li = document.createElement('li');
+  li.className = 'empty-message success-message';
+  li.textContent = 'You’re all caught up! Great work.';
   listEl.appendChild(li);
   return;
 }
