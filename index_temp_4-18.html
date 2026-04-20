@@ -1400,8 +1400,10 @@ renderAssignments(assignmentItems);
 
         const visible = (items || []).filter(item => {
   const hasScore = (item.score !== undefined && item.score !== '' && item.score != null);
-  // show if not completed OR completed but ungraded
-  return !item.completed || !hasScore;
+
+  const isCompleted = (item.completed === true || item.completed === "TRUE");
+
+  return !isCompleted || !hasScore;
 });
 
 // NEW: check for "all caught up"
