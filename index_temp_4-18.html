@@ -1359,7 +1359,11 @@ if (plannedSelect) {
     }
 
     // Next 5 list
-    renderAssignments(data.assignments || []);
+    const assignmentItems = (data.assignments && data.assignments.length)
+  ? data.assignments
+  : (data.satAssignments || []);
+
+renderAssignments(assignmentItems);
 
     // Full SAT list for scorecards
     var satList = (data.satAssignments && data.satAssignments.length)
