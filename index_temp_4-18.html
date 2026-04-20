@@ -554,6 +554,13 @@
   line-height:1.7;
 }    
 
+/* Login error message */
+.login-error{
+  color:#a61e2c;
+  font-weight:700;
+}
+
+    
     
   </style>
 </head>
@@ -1204,13 +1211,16 @@ createMarker(100, goal, "goal");
 
 
           if (!res.ok || data.error){
-            statusEl.textContent = data.error || 'Error loading assignments.';
+            statusEl.textContent = data.error || 'Invalid Student ID or PIN. Please try again.';
+            statusEl.className = 'muted login-error';
             listEl.innerHTML = '';
             return;
           }
 
 currentStudent = { studentId, pin };
 statusEl.textContent = 'Showing your next assignments.';
+
+statusEl.className = 'muted'; 
 
 // 👇 NEW: reveal the main dashboard content
 const dash = document.getElementById('dashboard-content');
