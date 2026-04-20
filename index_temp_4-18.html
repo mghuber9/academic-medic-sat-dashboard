@@ -1378,11 +1378,12 @@ if (plannedSelect) {
       function renderAssignments(items){
         listEl.innerHTML = '';
         if (!items.length){
-          const li = document.createElement('li');
-          li.textContent = 'No upcoming assignments yet.';
-          listEl.appendChild(li);
-          return;
-        }
+  const li = document.createElement('li');
+  li.className = 'empty-message';
+  li.textContent = 'No assignments have been added yet. Please check back soon.';
+  listEl.appendChild(li);
+  return;
+}
 
         const visible = (items || []).filter(item => {
   const hasScore = (item.score !== undefined && item.score !== '' && item.score != null);
