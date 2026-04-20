@@ -810,76 +810,35 @@
   </div> <!-- end #dashboard-content -->
 
   <!-- ===== Shared Scores Configuration ===== -->
-  <script id="SHARED_SCORES" type="application/json">
-  {
-    "SAT 1": {
-      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
-      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
-    },
-    "SAT 2": {
-      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
-      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
-    },
-    "SAT 3": {
-      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
-      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
-    },
-    "SAT 4": {
-      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
-      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
-    },
-    "SAT 5": {
-      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
-      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
-    },
-    "SAT 6": {
-      "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
-      "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
-    }
+  <!-- ===== Shared Scores Configuration ===== -->
+<script id="SHARED_SCORES" type="application/json">
+{
+  "SAT 1": {
+    "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+    "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+  },
+  "SAT 2": {
+    "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+    "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+  },
+  "SAT 3": {
+    "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+    "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+  },
+  "SAT 4": {
+    "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+    "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+  },
+  "SAT 5": {
+    "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+    "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
+  },
+  "SAT 6": {
+    "Math Module 1": "—", "Math Module 2": "—", "R&W Module 1": "—", "R&W Module 2": "—",
+    "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
   }
-
-document.getElementById('change-pin-btn')?.addEventListener('click', async function(){
-  if (!currentStudent) return;
-
-  const newPin = prompt("Enter your new 4-digit PIN:");
-
-  if (!newPin) return;
-
-  if (!/^\d{4}$/.test(newPin)) {
-    alert("PIN must be exactly 4 digits.");
-    return;
-  }
-
-  try{
-    const qs = new URLSearchParams({
-      action: 'changePin',
-      student_id: currentStudent.studentId,
-      pin: currentStudent.pin,
-      new_pin: newPin
-    });
-
-    const res = await fetch(ASSIGNMENTS_API_URL + '?' + qs.toString());
-    const data = await res.json();
-
-    if (!res.ok || data.error){
-      alert(data.error || "Error updating PIN.");
-      return;
-    }
-
-    alert("PIN updated successfully!");
-
-    // update local copy so future requests use new PIN
-    currentStudent.pin = newPin;
-
-  } catch(err){
-    console.error(err);
-    alert("Network error while updating PIN.");
-  }
-});
-
-    
-  </script>
-
+}
+</script>
   <!-- Main SAT / progress logic -->
   <script>
 
