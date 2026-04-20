@@ -1762,6 +1762,47 @@ async function undoCompleted(assignmentId, li, checkbox){
   }
 }
 
+const changePinBtn = document.getElementById('change-pin-btn');
+
+if (changePinBtn) {
+  changePinBtn.addEventListener('click', async function () {
+    if (!currentStudent) {
+      alert('Please log in first.');
+      return;
+    }
+
+    const newPin = prompt('Enter a new 4-digit PIN:');
+    if (!newPin) return;
+
+    if (!/^\d{4}$/.test(newPin)) {
+      alert('PIN must be exactly 4 digits.');
+      return;
+    }
+
+    try {
+      const qs = new URLSearchParams({
+        action: 'changePin',
+        student_id: currentStudent.studentId,
+        pin: currentStudent.pin,
+        new_pin: newPin
+      });
+
+      const res = await fetch(apiUrl + '?' + qs.toString());
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        alert(data.error || 'Error updating PIN.');
+        return;
+      }
+
+      currentStudent.pin = newPin;
+      alert('PIN updated successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Network error while updating PIN.');
+    }
+  });
+}
 
       
     });
