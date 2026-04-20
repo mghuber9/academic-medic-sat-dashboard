@@ -725,6 +725,7 @@
 
   <main class="container">
     <div class="toolbar">
+      <button id="change-pin-btn">Change PIN</button>
       <span class="spacer"></span>
       <button onclick="window.print()">Print</button>
     </div>
@@ -769,6 +770,47 @@
       "Composite Math": "—", "Composite Verbal": "—", "Overall": "—"
     }
   }
+
+document.getElementById('change-pin-btn')?.addEventListener('click', async function(){
+  if (!currentStudent) return;
+
+  const newPin = prompt("Enter your new 4-digit PIN:");
+
+  if (!newPin) return;
+
+  if (!/^\d{4}$/.test(newPin)) {
+    alert("PIN must be exactly 4 digits.");
+    return;
+  }
+
+  try{
+    const qs = new URLSearchParams({
+      action: 'changePin',
+      student_id: currentStudent.studentId,
+      pin: currentStudent.pin,
+      new_pin: newPin
+    });
+
+    const res = await fetch(ASSIGNMENTS_API_URL + '?' + qs.toString());
+    const data = await res.json();
+
+    if (!res.ok || data.error){
+      alert(data.error || "Error updating PIN.");
+      return;
+    }
+
+    alert("PIN updated successfully!");
+
+    // update local copy so future requests use new PIN
+    currentStudent.pin = newPin;
+
+  } catch(err){
+    console.error(err);
+    alert("Network error while updating PIN.");
+  }
+});
+
+    
   </script>
 
   <!-- Main SAT / progress logic -->
