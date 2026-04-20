@@ -594,6 +594,27 @@
   opacity:0.9;
   transform:translateY(-1px);
 }    
+
+.dashboard-actions{
+  text-align:right;
+  margin-bottom:10px;
+}
+
+#change-pin-btn{
+  background:#f1f3f5;
+  border:1px solid #ccc;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+#change-pin-btn:hover{
+  background:#e9ecef;
+}
+
+
+    
     
   </style>
 </head>
@@ -775,6 +796,7 @@
       <button id="change-pin-btn">Change PIN</button>
       <span class="spacer"></span>
       <button onclick="window.print()">Print</button>
+      <button id="change-pin-btn">Change PIN</button>
     </div>
 
     <div id="wrap"></div>
@@ -862,6 +884,50 @@ document.getElementById('change-pin-btn')?.addEventListener('click', async funct
 
   <!-- Main SAT / progress logic -->
   <script>
+
+document.getElementById('change-pin-btn')?.addEventListener('click', async function(){
+
+  if (!currentStudent) return;
+
+  const newPin = prompt("Enter a new 4-digit PIN:");
+
+  if (!newPin) return;
+
+  if (!/^\d{4}$/.test(newPin)){
+    alert("PIN must be exactly 4 digits.");
+    return;
+  }
+
+  try{
+    const qs = new URLSearchParams({
+      action: 'changePin',
+      student_id: currentStudent.studentId,
+      pin: currentStudent.pin,
+      new_pin: newPin
+    });
+
+    const res = await fetch(ASSIGNMENTS_API_URL + '?' + qs.toString());
+    const data = await res.json();
+
+    if (!res.ok || data.error){
+      alert(data.error || "Error updating PIN.");
+      return;
+    }
+
+    alert("PIN updated successfully!");
+
+    // update local session
+    currentStudent.pin = newPin;
+
+  } catch(err){
+    console.error(err);
+    alert("Network error. Try again.");
+  }
+
+});
+
+
+    
   document.addEventListener("DOMContentLoaded", function(){
 
     /* -------- Focus tips ------- */
