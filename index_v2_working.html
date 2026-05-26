@@ -280,6 +280,7 @@
 
 
     .workspace-label{
+  display:none;    
   max-width:820px;
   margin:16px auto -6px;
   padding:0 20px;
@@ -1207,6 +1208,10 @@ if (loginHeader) loginHeader.style.display = 'none';
 // 👇 NEW: show the "Next 5 Assignments" title
 const assignTitle = document.getElementById('assignments-title');
 if (assignTitle) assignTitle.style.display = '';
+
+
+const workspaceLabel = document.querySelector('.workspace-label');
+if (workspaceLabel) workspaceLabel.style.display = '';
 
 
 
