@@ -737,50 +737,7 @@
   <!-- Main SAT / progress logic -->
   <script>
 
-document.getElementById('change-pin-btn')?.addEventListener('click', async function(){
 
-  if (!currentStudent) return;
-
-  const newPin = prompt("Enter a new 4-digit PIN:");
-
-  if (!newPin) return;
-
-  if (!/^\d{4}$/.test(newPin)){
-    alert("PIN must be exactly 4 digits.");
-    return;
-  }
-
-  try{
-    const qs = new URLSearchParams({
-      action: 'changePin',
-      student_id: currentStudent.studentId,
-      pin: currentStudent.pin,
-      new_pin: newPin
-    });
-
-    const res = await fetch(ASSIGNMENTS_API_URL + '?' + qs.toString());
-    const data = await res.json();
-
-    if (!res.ok || data.error){
-      alert(data.error || "Error updating PIN.");
-      return;
-    }
-
-    alert("PIN updated successfully!");
-
-    // update local session
-    currentStudent.pin = newPin;
-
-  } catch(err){
-    console.error(err);
-    alert("Network error. Try again.");
-  }
-
-});
-
-
-    
-  document.addEventListener("DOMContentLoaded", function(){
 
     /* -------- Focus tips ------- */
     var FOCUS_TIPS = [
