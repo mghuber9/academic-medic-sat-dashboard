@@ -162,6 +162,41 @@ header{
   font-size:13px;
 }
 
+.feature-bar{
+  margin-top:-10px;
+  padding-bottom:60px;
+}
+
+.feature-grid{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:28px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(17,24,39,0.06);
+}
+
+.feature-item{
+  padding:32px 24px;
+}
+
+.feature-item:not(:last-child){
+  border-right:1px solid var(--border);
+}
+
+.feature-item h3{
+  color:var(--brand);
+  margin-top:0;
+  margin-bottom:12px;
+}
+
+.feature-item p{
+  color:var(--muted);
+  line-height:1.7;
+  margin:0;
+}
+  
 .btn-primary{
   background:var(--brand);
   color:white;
@@ -301,6 +336,16 @@ header{
       grid-template-columns:1fr;
   }
 
+  .feature-grid{
+  grid-template-columns:1fr;
+}
+
+.feature-item:not(:last-child){
+  border-right:none;
+  border-bottom:1px solid var(--border);
+}
+  
+
 .hero-layout{
   grid-template-columns:1fr;
 }
@@ -390,6 +435,51 @@ header{
 
   </div>
 </section>
+
+<section class="feature-bar">
+
+  <div class="container">
+
+    <div class="feature-grid">
+
+      <div class="feature-item">
+        <h3>Guided Practice</h3>
+        <p>
+          Clear next steps and structured assignments that help
+          students stay focused.
+        </p>
+      </div>
+
+      <div class="feature-item">
+        <h3>Strategic Thinking</h3>
+        <p>
+          Learn patterns, shortcuts, and SAT-specific techniques
+          that improve efficiency.
+        </p>
+      </div>
+
+      <div class="feature-item">
+        <h3>Progress Tracking</h3>
+        <p>
+          Monitor growth, celebrate wins, and build momentum
+          over time.
+        </p>
+      </div>
+
+      <div class="feature-item">
+        <h3>Confidence Building</h3>
+        <p>
+          Reduce overwhelm and prepare with purpose instead of
+          relying on cramming.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+  
 
 <section class="reassurance">
 
