@@ -1,15 +1,187 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Academic Medic Study Club</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Academic Medic Study Club</title>
+
+<style>
+:root{
+  --bg:#F6F5F1;
+  --card:#FFFFFF;
+  --text:#1F2330;
+  --muted:#5E667D;
+
+  --brand:#264E36;
+  --accent:#E9B44C;
+
+  --border:#D9D6CC;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+header{
+  border-bottom:1px solid var(--border);
+  background:white;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  color:var(--brand);
+}
+
+.logo img{
+  height:48px;
+}
+
+.nav-links{
+  display:flex;
+  gap:24px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+}
+
+.hero{
+  padding:90px 0;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:clamp(36px,6vw,64px);
+  margin-bottom:20px;
+  color:var(--brand);
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  font-size:1.2rem;
+  line-height:1.7;
+  color:var(--muted);
+}
+
+.hero-buttons{
+  margin-top:36px;
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.btn-primary{
+  background:var(--brand);
+  color:white;
+  padding:14px 24px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.btn-secondary{
+  border:2px solid var(--brand);
+  color:var(--brand);
+  padding:14px 24px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.placeholder{
+  text-align:center;
+  padding:80px 20px;
+  color:var(--muted);
+}
+
+@media(max-width:768px){
+
+  .nav{
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+  }
+
+}
+</style>
 </head>
 <body>
 
-<h1>Academic Medic Study Club</h1>
+<header>
+  <div class="container nav">
 
-<p>Landing Page Under Construction</p>
+    <div class="logo">
+      <img src="transparent logo.png" alt="Academic Medic Logo">
+      <span>Academic Medic</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">How It Works</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Strategies</a>
+      <a href="#">Free Practice</a>
+      <a href="#">Login</a>
+    </nav>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+
+    <h1>Work smarter. Think strategically.</h1>
+
+    <p>
+      A calmer, smarter SAT prep system focused on strategy,
+      consistency, and steady improvement.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Get Free Access</a>
+      <a href="#" class="btn-secondary">Explore the Dashboard</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="placeholder">
+  <div class="container">
+    Additional sections coming next...
+  </div>
+</section>
 
 </body>
 </html>
