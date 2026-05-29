@@ -121,6 +121,50 @@ header{
   color:var(--muted);
 }
 
+.reassurance{
+  background:white;
+  padding:90px 0;
+}
+
+.reassurance h2{
+  text-align:center;
+  color:var(--brand);
+  font-size:clamp(28px,4vw,42px);
+  margin-bottom:20px;
+}
+
+.section-text{
+  max-width:800px;
+  margin:0 auto 50px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.info-card{
+  background:var(--bg);
+  padding:28px;
+  border-radius:20px;
+  border:1px solid var(--border);
+}
+
+.info-card h3{
+  color:var(--brand);
+  margin-top:0;
+}
+
+.info-card p{
+  color:var(--muted);
+  line-height:1.7;
+}
+  
+
 @media(max-width:768px){
 
   .nav{
@@ -132,6 +176,10 @@ header{
     flex-wrap:wrap;
     justify-content:center;
     gap:12px;
+  }
+
+  .card-grid{
+    grid-template-columns:1fr;
   }
 
 }
@@ -177,10 +225,48 @@ header{
   </div>
 </section>
 
-<section class="placeholder">
+<section class="reassurance">
+
   <div class="container">
-    Additional sections coming next...
+
+    <h2>SAT prep does not have to feel overwhelming.</h2>
+
+    <p class="section-text">
+      Academic Medic is designed to bring more clarity, structure,
+      and confidence to SAT prep — reducing the chaos and pressure
+      that often leave students feeling overwhelmed.
+    </p>
+
+    <div class="card-grid">
+
+      <div class="info-card">
+        <h3>Guided Practice</h3>
+        <p>
+          Focus on what matters most with clear next steps and
+          structured assignments.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3>Strategic Thinking</h3>
+        <p>
+          Learn to recognize patterns, avoid traps, and make
+          smarter decisions on test day.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3>Steady Improvement</h3>
+        <p>
+          Build confidence through consistent progress rather
+          than cramming and overwhelm.
+        </p>
+      </div>
+
+    </div>
+
   </div>
+
 </section>
 
 </body>
