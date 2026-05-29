@@ -71,30 +71,95 @@ header{
 }
 
 .hero{
-  padding:90px 0;
-  text-align:center;
+  padding:80px 0 40px;
 }
 
-.hero h1{
-  font-size:clamp(36px,6vw,64px);
-  margin-bottom:20px;
+.hero-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+}
+
+.hero-copy h1{
+  font-size:clamp(42px,6vw,72px);
+  line-height:1.05;
+  margin:0 0 24px;
   color:var(--brand);
 }
 
-.hero p{
-  max-width:700px;
-  margin:auto;
+.hero-copy p{
+  max-width:620px;
   font-size:1.2rem;
   line-height:1.7;
   color:var(--muted);
 }
 
 .hero-buttons{
-  margin-top:36px;
+  margin-top:34px;
   display:flex;
-  justify-content:center;
   gap:16px;
   flex-wrap:wrap;
+}
+
+.hero-note{
+  margin-top:22px;
+  color:var(--muted);
+  font-weight:500;
+}
+
+.hero-visual{
+  min-height:420px;
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(233,180,76,0.22), transparent 28%),
+    radial-gradient(circle at 80% 30%, rgba(38,78,54,0.16), transparent 32%),
+    white;
+  border:1px solid var(--border);
+  box-shadow:0 18px 45px rgba(17,24,39,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+}
+
+.hero-card{
+  width:100%;
+  max-width:420px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 14px 30px rgba(17,24,39,0.08);
+}
+
+.hero-card h3{
+  margin:0 0 8px;
+  color:var(--brand);
+}
+
+.hero-card p{
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.mock-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0;
+  border-top:1px solid var(--border);
+  color:var(--text);
+  font-weight:700;
+}
+
+.mock-badge{
+  color:var(--brand);
+  background:rgba(38,78,54,0.10);
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:13px;
 }
 
 .btn-primary{
@@ -236,6 +301,22 @@ header{
       grid-template-columns:1fr;
   }
 
+.hero-layout{
+  grid-template-columns:1fr;
+}
+
+.hero-copy{
+  text-align:center;
+}
+
+.hero-buttons{
+  justify-content:center;
+}
+
+.hero-visual{
+  min-height:auto;
+}
+  
 }
 </style>
 </head>
@@ -262,18 +343,49 @@ header{
 </header>
 
 <section class="hero">
-  <div class="container">
+  <div class="container hero-layout">
 
-    <h1>Work smarter. Think strategically.</h1>
+    <div class="hero-copy">
+      <h1>Work smarter. Think strategically.</h1>
 
-    <p>
-      A calmer, smarter SAT prep system focused on strategy,
-      consistency, and steady improvement.
-    </p>
+      <p>
+        A calmer, smarter SAT prep system focused on strategy,
+        consistency, and steady improvement.
+      </p>
 
-    <div class="hero-buttons">
-      <a href="#" class="btn-primary">Get Free Access</a>
-      <a href="#" class="btn-secondary">Explore the Dashboard</a>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Get Free Access</a>
+        <a href="#" class="btn-secondary">Explore the Dashboard</a>
+      </div>
+
+      <div class="hero-note">
+        Free to start. No credit card required.
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <h3>Today&apos;s SAT Plan</h3>
+        <p>
+          Clear next steps, guided practice, and steady progress —
+          without the overwhelm.
+        </p>
+
+        <div class="mock-row">
+          <span>Next Assignment</span>
+          <span class="mock-badge">Start Here</span>
+        </div>
+
+        <div class="mock-row">
+          <span>Strategy Focus</span>
+          <span class="mock-badge">Patterns</span>
+        </div>
+
+        <div class="mock-row">
+          <span>Progress</span>
+          <span class="mock-badge">Building</span>
+        </div>
+      </div>
     </div>
 
   </div>
