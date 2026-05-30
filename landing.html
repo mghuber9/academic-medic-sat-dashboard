@@ -70,6 +70,32 @@ header{
   font-weight:600;
 }
 
+.dashboard-highlights{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  max-width:1000px;
+  margin:40px auto;
+}
+
+.dashboard-highlight{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+}
+
+.dashboard-highlight h3{
+  color:var(--brand);
+  margin-bottom:10px;
+}
+
+.dashboard-highlight p{
+  color:var(--muted);
+  line-height:1.6;
+}  
+
 .hero{
   padding:80px 0 40px;
 }
@@ -375,6 +401,10 @@ header{
     flex-direction:column;
     gap:16px;
   }
+
+  .dashboard-highlights{
+  grid-template-columns:1fr;
+}
 
   .nav-links{
     flex-wrap:wrap;
