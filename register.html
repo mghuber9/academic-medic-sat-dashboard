@@ -1,1 +1,264 @@
-**
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Create Free Account | Academic Medic</title>
+
+<style>
+:root{
+  --bg:#F6F5F1;
+  --card:#FFFFFF;
+  --text:#1F2330;
+  --muted:#5E667D;
+  --brand:#264E36;
+  --accent:#E9B44C;
+  --border:#D9D6CC;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+header{
+  border-bottom:1px solid var(--border);
+  background:white;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  color:var(--brand);
+}
+
+.logo img{
+  height:60px;
+}
+
+.nav a{
+  color:var(--brand);
+  text-decoration:none;
+  font-weight:700;
+}
+
+.register-section{
+  min-height:calc(100vh - 97px);
+  display:flex;
+  align-items:center;
+  padding:70px 0;
+}
+
+.register-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+}
+
+.register-copy h1{
+  color:var(--brand);
+  font-size:clamp(36px,5vw,58px);
+  line-height:1.08;
+  margin-bottom:20px;
+}
+
+.register-copy p{
+  color:var(--muted);
+  line-height:1.8;
+  font-size:1.1rem;
+  max-width:560px;
+}
+
+.register-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:34px;
+  box-shadow:0 18px 45px rgba(17,24,39,0.08);
+}
+
+.register-card h2{
+  color:var(--brand);
+  margin-top:0;
+  margin-bottom:8px;
+}
+
+.register-card .small-text{
+  color:var(--muted);
+  margin-bottom:28px;
+  line-height:1.6;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  color:var(--brand);
+  margin-bottom:8px;
+}
+
+input{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-size:1rem;
+  font-family:inherit;
+}
+
+button{
+  width:100%;
+  border:none;
+  background:var(--brand);
+  color:white;
+  padding:15px 20px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:1rem;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.login-note{
+  margin-top:20px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.login-note a{
+  color:var(--brand);
+  font-weight:700;
+  text-decoration:none;
+}
+
+.free-note{
+  margin-top:18px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+@media(max-width:768px){
+
+  .nav{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .register-layout{
+    grid-template-columns:1fr;
+  }
+
+  .register-copy{
+    text-align:center;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+
+    <div class="logo">
+      <img src="transparent logo.png" alt="Academic Medic Logo">
+      <span>Academic Medic</span>
+    </div>
+
+    <a href="landing.html">Back to Home</a>
+
+  </div>
+</header>
+
+<section class="register-section">
+
+  <div class="container register-layout">
+
+    <div class="register-copy">
+
+      <h1>Create your free Academic Medic account.</h1>
+
+      <p>
+        Start with a simple SAT prep dashboard designed to help you
+        stay organized, follow clear next steps, and prepare with
+        more confidence.
+      </p>
+
+      <p>
+        You can add more details later as your study plan grows.
+      </p>
+
+    </div>
+
+    <div class="register-card">
+
+      <h2>Get Free Access</h2>
+
+      <p class="small-text">
+        Create your account in less than a minute.
+      </p>
+
+      <form>
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" name="firstName" type="text" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required>
+        </div>
+
+        <button type="submit">Create Free Account</button>
+
+      </form>
+
+      <div class="free-note">
+        Free to start. No credit card required.
+      </div>
+
+      <div class="login-note">
+        Already have an account? <a href="#">Log in</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</body>
+</html>
