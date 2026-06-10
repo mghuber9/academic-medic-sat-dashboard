@@ -285,6 +285,13 @@ button{
 const REGISTER_URL =
 "https://script.google.com/macros/s/AKfycbzQJBcPfXk2QRRVQpRjIQlcCjxDPXkDRm1wlR7AWoycj_X7eunvsN-T2RWINP8QTGDX/exec";
 
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const messageBox = document.getElementById("registerMessage");
+  messageBox.textContent = "Creating your account...";
+});  
+
 </script>  
 
 </body>
