@@ -294,6 +294,13 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   const firstName = document.getElementById("firstName").value.trim();
 const email = document.getElementById("email").value.trim();
 const password = document.getElementById("password").value.trim();
+
+const url =
+  REGISTER_URL +
+  "?action=registerStudent" +
+  "&first_name=" + encodeURIComponent(firstName) +
+  "&email=" + encodeURIComponent(email) +
+  "&password=" + encodeURIComponent(password);
   
 });  
 
