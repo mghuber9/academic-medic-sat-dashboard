@@ -301,6 +301,11 @@ const url =
   "&first_name=" + encodeURIComponent(firstName) +
   "&email=" + encodeURIComponent(email) +
   "&password=" + encodeURIComponent(password);
+
+const response = await fetch(url);
+const data = await response.json();
+
+console.log(data);  
   
 });  
 
