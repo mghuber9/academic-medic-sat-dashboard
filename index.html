@@ -982,10 +982,11 @@ createMarker(100, goal, "goal");
 }, "Open Test");
 
 if (window.studentDisplayName && window.studentIdNumber){
-  var zipInfo = el("div", {class:"muted"},
-    "ZipGrade: Name Box = " + window.studentDisplayName +
-    " · Student ID = " + window.studentIdNumber
-  );
+ var zipInfo = el("div", {class:"muted"});
+zipInfo.innerHTML =
+  "ZipGrade Login<br>" +
+  "Name: " + window.studentDisplayName + "<br>" +
+  "Student ID: " + window.studentIdNumber;
   card.append(zipInfo);
 }
       row1.append(link);
