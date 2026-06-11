@@ -1126,8 +1126,8 @@ createMarker(100, goal, "goal");
       const form      = document.getElementById('login-form');
       const listEl    = document.getElementById('assignments-list');
       const statusEl  = document.getElementById('login-status');
-      const idInput   = document.getElementById('student-id');
-      const pinInput  = document.getElementById('student-pin');
+      const emailInput    = document.getElementById('student-email');
+      const passwordInput = document.getElementById('student-password');
       const loginButton = document.getElementById('login-button');
 
       if (!form || !listEl) return;
@@ -1136,9 +1136,9 @@ createMarker(100, goal, "goal");
 
       form.addEventListener('submit', function(ev){
         ev.preventDefault();
-        const studentId = idInput.value.trim();
-        const pin       = pinInput.value.trim();
-        if (!studentId || !pin) return;
+        const email    = emailInput.value.trim();
+const password = passwordInput.value.trim();
+if (!email || !password) return;
 
 statusEl.textContent = 'Loading your dashboard...';
 statusEl.className = 'muted';
@@ -1148,7 +1148,7 @@ if (loginButton) {
   loginButton.textContent = 'Loading...';
 }
 
-loadAssignments(studentId, pin);
+loadAssignments(email, password);
       });
 
       async function loadAssignments(studentId, pin){
