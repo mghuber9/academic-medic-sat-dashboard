@@ -619,16 +619,17 @@
 <section class="assignments-section">
   <div class="assignments-header">
     <h2>Student Login</h2>
-    <p class="muted">Enter your Student ID and PIN to load your assignments, scores, and progress.</p>
+    <p class="muted">Enter your email and password to load your assignments, scores, and progress.</p>
   </div>
   <form id="login-form" class="assignments-login">
     <label>
       Student ID
-      <input type="text" id="student-id" autocomplete="username" required>
+      Email Address
+<input type="email" id="student-email" autocomplete="username" required>
     </label>
     <label>
-      PIN
-      <input type="password" id="student-pin" inputmode="numeric" autocomplete="current-password" required>
+      Password
+<input type="password" id="student-password" autocomplete="current-password" required>
     </label>
     <button type="submit" id="login-button">Log In</button>
     <span id="login-status" class="muted"></span>
