@@ -310,7 +310,12 @@ console.log(data);
 if (data.ok) {
   messageBox.textContent =
     "Account created successfully! Redirecting to login...";
-}  
+
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 2000);
+}
+
 });  
 
 </script>  
