@@ -981,22 +981,13 @@ createMarker(100, goal, "goal");
   rel:"noopener noreferrer"
 }, "Open Test");
 
-link.addEventListener("click", function(e){
-
-  if (window.studentDisplayName && window.studentIdNumber){
-
-    setTimeout(function(){
-      alert(
-        "ZipGrade Information\n\n" +
-        "Name Box: " + window.studentDisplayName + "\n" +
-        "Student ID: " + window.studentIdNumber + "\n\n" +
-        "You may need to enter this information on the ZipGrade page."
-      );
-    }, 300);
-
-  }
-
-});      
+if (window.studentDisplayName && window.studentIdNumber){
+  var zipInfo = el("div", {class:"muted"},
+    "ZipGrade: Name Box = " + window.studentDisplayName +
+    " · Student ID = " + window.studentIdNumber
+  );
+  card.append(zipInfo);
+}
       row1.append(link);
       card.append(row1);
 
