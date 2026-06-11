@@ -985,17 +985,18 @@ link.addEventListener("click", function(e){
 
   if (window.studentDisplayName && window.studentIdNumber){
 
-    alert(
-      "ZipGrade Information\n\n" +
-      "Name Box: " + window.studentDisplayName + "\n" +
-      "Student ID: " + window.studentIdNumber + "\n\n" +
-      "You may need to enter this information on the next page."
-    );
+    setTimeout(function(){
+      alert(
+        "ZipGrade Information\n\n" +
+        "Name Box: " + window.studentDisplayName + "\n" +
+        "Student ID: " + window.studentIdNumber + "\n\n" +
+        "You may need to enter this information on the ZipGrade page."
+      );
+    }, 300);
 
   }
 
-});
-      
+});      
       row1.append(link);
       card.append(row1);
 
