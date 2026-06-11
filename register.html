@@ -307,6 +307,11 @@ const data = await response.json();
 
 console.log(data);
 
+if (data.error) {
+  messageBox.textContent = data.error;
+  return;
+}  
+
 if (data.ok) {
   messageBox.textContent =
     "Account created successfully! Redirecting to your dashboard...";
