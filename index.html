@@ -1008,7 +1008,7 @@ createMarker(100, goal, "goal");
       var ts = sharedScores && sharedScores[testName];
       var val = (ts && ts[moduleName]) ? ts[moduleName] : "—";
       var score = el("span", {class:"score", title:"Edit in SCORES JSON"}, val);
-      row2.append(score, el("span", {class:"muted"}, "Shared (from HTML)"));
+      row2.append(score);
       card.append(row2);
 
       return card;
@@ -1186,7 +1186,7 @@ loadAssignments(email, password);
 
 
           if (!res.ok || data.error){
-  statusEl.textContent = data.error || 'Invalid Student ID or PIN. Please try again.';
+  statusEl.textContent = data.error || 'Invalid email or password. Please try again.';
   statusEl.className = 'muted login-error';
   listEl.innerHTML = '';
 
