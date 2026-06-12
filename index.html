@@ -627,11 +627,19 @@
       Email Address
 <input type="email" id="student-email" autocomplete="username" required>
     </label>
-    <label>
-      Password
+    
+   <label>
+  Password
 <input type="password" id="student-password" autocomplete="current-password" required>
-    </label>
-    <button type="submit" id="login-button">Log In</button>
+</label>
+
+<label style="flex-direction:row; align-items:center; gap:6px; margin-bottom:8px;">
+  <input type="checkbox" id="remember-me" style="width:auto; min-width:auto;">
+  Remember me
+</label>
+
+<button type="submit" id="login-button">Log In</button>
+    
     <span id="login-status" class="muted"></span>
   </form>
 
