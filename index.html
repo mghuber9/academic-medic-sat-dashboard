@@ -1170,6 +1170,15 @@ if (savedEmail && savedPassword && emailInput && passwordInput) {
   emailInput.value = savedEmail;
   passwordInput.value = savedPassword;
   if (rememberMe) rememberMe.checked = true;
+
+  statusEl.textContent = 'Signing you in...';
+
+  if (loginButton) {
+    loginButton.disabled = true;
+    loginButton.textContent = 'Loading...';
+  }
+
+  loadAssignments(savedEmail, savedPassword);
 }
 
       let currentStudent = null;
