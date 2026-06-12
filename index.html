@@ -1157,10 +1157,20 @@ createMarker(100, goal, "goal");
       const listEl    = document.getElementById('assignments-list');
       const statusEl  = document.getElementById('login-status');
       const emailInput    = document.getElementById('student-email');
-      const passwordInput = document.getElementById('student-password');
-      const loginButton = document.getElementById('login-button');
+const passwordInput = document.getElementById('student-password');
+const loginButton = document.getElementById('login-button');
+const rememberMe = document.getElementById('remember-me');
 
-      if (!form || !listEl) return;
+if (!form || !listEl) return;
+
+const savedEmail = localStorage.getItem('am_email');
+const savedPassword = localStorage.getItem('am_password');
+
+if (savedEmail && savedPassword && emailInput && passwordInput) {
+  emailInput.value = savedEmail;
+  passwordInput.value = savedPassword;
+  if (rememberMe) rememberMe.checked = true;
+}
 
       let currentStudent = null;
 
