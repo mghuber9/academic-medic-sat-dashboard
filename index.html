@@ -714,9 +714,18 @@
   </section>
 
   <main class="container">
+    
   <div class="workspace-tools-label">SAT Workspace</div>
 
-  <div class="toolbar">
+<div id="zipgrade-info"
+     style="display:none; margin-bottom:14px; padding:14px 16px; background:#FFFFFF; border:1px solid rgba(0,0,0,0.06); border-radius:14px;">
+  <strong>ZipGrade Login Information</strong><br>
+  Name: <span id="zipgrade-name"></span><br>
+  Student ID: <span id="zipgrade-student-id"></span>
+</div>
+
+<div class="toolbar">
+    
     <span class="spacer" style="min-width:12px;"></span>
     <button type="button" onclick="window.print()">Print</button>
     <button type="button" id="change-pin-btn">Change PIN</button>
@@ -1218,6 +1227,16 @@ if (data.display_name) {
   // Store for ZipGrade reminders
   window.studentDisplayName = name;
   window.studentIdNumber = data.student_id || currentStudent.studentId;
+
+  const zipBox = document.getElementById('zipgrade-info');
+const zipName = document.getElementById('zipgrade-name');
+const zipId = document.getElementById('zipgrade-student-id');
+
+if (zipBox && zipName && zipId) {
+  zipName.textContent = window.studentDisplayName;
+  zipId.textContent = window.studentIdNumber;
+  zipBox.style.display = 'block';
+}
 
   document.getElementById('dashboard-title').textContent =
     name + "'s Digital SAT Practice Tests";
