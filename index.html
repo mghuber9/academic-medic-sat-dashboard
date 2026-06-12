@@ -1207,6 +1207,14 @@ loadAssignments(email, password);
 }
 
 currentStudent = { studentId, pin };
+
+const rememberMe = document.getElementById('remember-me');
+
+if (rememberMe && rememberMe.checked) {
+  localStorage.setItem('am_email', studentId);
+  localStorage.setItem('am_password', pin);
+}
+          
 statusEl.textContent = 'Showing your next assignments.';
 
 statusEl.className = 'muted'; 
