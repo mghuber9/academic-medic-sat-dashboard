@@ -743,12 +743,10 @@
 </div>
 
 <div class="toolbar">
-    
-    <span class="spacer" style="min-width:12px;"></span>
-    <button type="button" onclick="window.print()">Print</button>
-    <button type="button" id="change-pin-btn">Change PIN</button>
-  </div>
-
+  <span class="spacer" style="min-width:12px;"></span>
+  <button type="button" id="change-password-btn">Change Password</button>
+  <button type="button" id="logout-btn">Log Out</button>
+</div>
   <div id="wrap"></div>
 
   <section class="footer" style="text-align:center;">
@@ -1719,7 +1717,17 @@ async function undoCompleted(assignmentId, li, checkbox){
   }
 }
 
-const changePinBtn = document.getElementById('change-pin-btn');
+const logoutBtn = document.getElementById('logout-btn');
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', function () {
+    localStorage.removeItem('am_email');
+    localStorage.removeItem('am_password');
+    window.location.reload();
+  });
+}
+
+const changePasswordBtn = document.getElementById('change-password-btn');
 
 if (changePinBtn) {
   changePinBtn.addEventListener('click', async function () {
