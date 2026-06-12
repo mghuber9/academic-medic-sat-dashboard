@@ -1729,6 +1729,48 @@ if (logoutBtn) {
 
 const changePasswordBtn = document.getElementById('change-password-btn');
 
+if (changePasswordBtn) {
+  changePasswordBtn.addEventListener('click', async function () {
+    if (!currentStudent) {
+      alert('Please log in first.');
+      return;
+    }
+
+    const oldPassword = prompt('Enter your current password:');
+    if (!oldPassword) return;
+
+    const newPassword = prompt('Enter your new password:');
+    if (!newPassword) return;
+
+    try {
+      const qs = new URLSearchParams({
+        action: 'changePassword',
+        email: currentStudent.studentId,
+        old_password: oldPassword,
+        new_password: newPassword
+      });
+
+      const res = await fetch(apiUrl + '?' + qs.toString());
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        alert(data.error || 'Error updating password.');
+        return;
+      }
+
+      currentStudent.pin = newPassword;
+
+      localStorage.setItem('am_email', currentStudent.studentId);
+      localStorage.setItem('am_password', newPassword);
+
+      alert('Password updated successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Network error while updating password.');
+    }
+  });
+}      
+
 
       
     });
