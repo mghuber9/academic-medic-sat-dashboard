@@ -1186,7 +1186,7 @@ loadAssignments(email, password);
 
 
           if (!res.ok || data.error){
-  statusEl.textContent = data.error || 'Invalid email or password. Please try again.';
+  statusEl.textContent = 'Invalid email or password. Please try again.';
   statusEl.className = 'muted login-error';
   listEl.innerHTML = '';
 
