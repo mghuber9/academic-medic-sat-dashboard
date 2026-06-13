@@ -1752,12 +1752,27 @@ if (forgotPasswordBtn) {
   forgotPasswordBtn.addEventListener('click', function () {
     const email = emailInput.value.trim();
 
-    if (!email) {
-      alert('Please enter your email address first.');
-      return;
-    }
+if (!email) {
+  alert('Please enter your email address first.');
+  return;
+}
 
-    alert('Password reset request received for: ' + email);
+try {
+  const qs = new URLSearchParams({
+    action: 'forgotPassword',
+    email: email
+  });
+
+  fetch(apiUrl + '?' + qs.toString())
+    .then(r => r.json())
+    .then(data => {
+      alert(data.message || 'Request received.');
+    });
+
+} catch (err) {
+  console.error(err);
+  alert('Network error.');
+}
   });
 }
       
