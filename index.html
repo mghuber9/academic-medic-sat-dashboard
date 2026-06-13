@@ -1167,6 +1167,9 @@ createMarker(100, goal, "goal");
   <!-- Assignments / login script -->
   <script>
     const ASSIGNMENTS_API_URL = 'https://script.google.com/macros/s/AKfycbzQJBcPfXk2QRRVQpRjIQlcCjxDPXkDRm1wlR7AWoycj_X7eunvsN-T2RWINP8QTGDX/exec';
+    const DEMO_MODE = new URLSearchParams(window.location.search).get('demo') === '1';
+    const DEMO_EMAIL = 'demo@academicmedic.com';
+    const DEMO_PASSWORD = 'D3mo!SAT#8Kp27Lx';
 
     document.addEventListener('DOMContentLoaded', function(){
       const apiUrl    = ASSIGNMENTS_API_URL;
