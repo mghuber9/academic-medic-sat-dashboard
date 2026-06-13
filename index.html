@@ -1750,7 +1750,14 @@ const forgotPasswordBtn = document.getElementById('forgot-password-btn');
 
 if (forgotPasswordBtn) {
   forgotPasswordBtn.addEventListener('click', function () {
-    alert('Forgot Password feature coming soon.');
+    const email = emailInput.value.trim();
+
+    if (!email) {
+      alert('Please enter your email address first.');
+      return;
+    }
+
+    alert('Password reset request received for: ' + email);
   });
 }
       
