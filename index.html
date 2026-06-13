@@ -1171,6 +1171,16 @@ createMarker(100, goal, "goal");
     const DEMO_EMAIL = 'demo@academicmedic.com';
     const DEMO_PASSWORD = 'D3mo!SAT#8Kp27Lx';
 
+    if (DEMO_MODE) {
+  window.addEventListener('DOMContentLoaded', () => {
+    const toolbar = document.getElementById('toolbar');
+    if (toolbar) {
+      toolbar.style.display = 'none';
+    }
+  });
+}
+    
+
     document.addEventListener('DOMContentLoaded', function(){
       const apiUrl    = ASSIGNMENTS_API_URL;
       const form      = document.getElementById('login-form');
