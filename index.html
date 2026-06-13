@@ -633,7 +633,9 @@
 <input type="password" id="student-password" autocomplete="current-password" required>
 </label>
 
-<label style="flex-direction:row; align-items:center; gap:6px; margin-bottom:8px;">
+<label
+  id="remember-me-container"
+  style="flex-direction:row; align-items:center; gap:6px; margin-bottom:8px;">
   <input type="checkbox" id="remember-me" style="width:auto; min-width:auto;">
   Remember me
 </label>
@@ -1176,6 +1178,16 @@ createMarker(100, goal, "goal");
     const toolbar = document.getElementById('toolbar');
     if (toolbar) {
       toolbar.style.display = 'none';
+    }
+
+    const rememberMeContainer = document.getElementById('remember-me-container');
+    if (rememberMeContainer) {
+      rememberMeContainer.style.display = 'none';
+    }
+
+    const forgotPasswordBtn = document.getElementById('forgot-password-btn');
+    if (forgotPasswordBtn) {
+      forgotPasswordBtn.style.display = 'none';
     }
   });
 }
