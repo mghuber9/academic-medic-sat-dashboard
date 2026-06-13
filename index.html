@@ -1187,7 +1187,8 @@ if (DEMO_MODE && emailInput && passwordInput) {
   emailInput.value = DEMO_EMAIL;
   passwordInput.value = DEMO_PASSWORD;
 }
-      
+
+let currentStudent = null;      
 const savedEmail = localStorage.getItem('am_email');
 const savedPassword = localStorage.getItem('am_password');
 
@@ -1218,7 +1219,7 @@ if (savedEmail && savedPassword && emailInput && passwordInput) {
   loadAssignments(savedEmail, savedPassword);
 }
 
-      let currentStudent = null;
+      
 
       form.addEventListener('submit', function(ev){
         ev.preventDefault();
