@@ -1183,6 +1183,11 @@ const rememberMe = document.getElementById('remember-me');
 
 if (!form || !listEl) return;
 
+if (DEMO_MODE && emailInput && passwordInput) {
+  emailInput.value = DEMO_EMAIL;
+  passwordInput.value = DEMO_PASSWORD;
+}
+      
 const savedEmail = localStorage.getItem('am_email');
 const savedPassword = localStorage.getItem('am_password');
 
