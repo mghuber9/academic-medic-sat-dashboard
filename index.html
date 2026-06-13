@@ -1191,6 +1191,18 @@ if (DEMO_MODE && emailInput && passwordInput) {
 const savedEmail = localStorage.getItem('am_email');
 const savedPassword = localStorage.getItem('am_password');
 
+if (DEMO_MODE && emailInput && passwordInput) {
+  statusEl.textContent = 'Loading demo dashboard...';
+
+  if (loginButton) {
+    loginButton.disabled = true;
+    loginButton.textContent = 'Loading...';
+  }
+
+  loadAssignments(DEMO_EMAIL, DEMO_PASSWORD);
+  return;
+}      
+
 if (savedEmail && savedPassword && emailInput && passwordInput) {
   emailInput.value = savedEmail;
   passwordInput.value = savedPassword;
