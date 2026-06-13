@@ -1766,7 +1766,7 @@ try {
   fetch(apiUrl + '?' + qs.toString())
     .then(r => r.json())
     .then(data => {
-      alert(data.message || 'Request received.');
+      alert(data.error || data.message || 'Request received.');
     });
 
 } catch (err) {
