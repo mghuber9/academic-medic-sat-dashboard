@@ -1687,7 +1687,10 @@ metaEl.textContent = parts.join(' · ');
           const data = await res.json();
 
           if (!res.ok || data.error) {
-            if (status) status.textContent = data.error || 'Error saving planned date.';
+            if (status) {
+  status.textContent = data.error || 'Error saving planned date.';
+  alert(data.error || 'Error saving planned date.');
+}
             return;
           }
 
