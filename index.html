@@ -1478,7 +1478,25 @@ if (plannedSelect) {
   }
 }
 
+// NEW: lock baseline score entry once starting scores exist
+const baselineBox = document.getElementById('baseline-score-entry');
+const savedVerbalRaw = data.official_verbal;
+const savedMathRaw = data.official_math;
 
+const hasSavedBaseline =
+  savedVerbalRaw !== '' &&
+  savedVerbalRaw != null &&
+  savedMathRaw !== '' &&
+  savedMathRaw != null;
+
+if (baselineBox && hasSavedBaseline) {
+  baselineBox.innerHTML =
+    '<strong>Starting SAT Scores Recorded</strong><br>' +
+    '<span style="font-size:0.9em; color:#5E667D;">' +
+    'Verbal: ' + savedVerbalRaw + ' · Math: ' + savedMathRaw +
+    '<br>Contact Academic Medic if these scores need to be corrected.' +
+    '</span>';
+}
           
 
     // NEW: student's planned test date display
