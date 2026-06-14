@@ -1898,6 +1898,20 @@ if (baselineSaveBtn) {
   });
 }
 
+const editGoalBtn = document.getElementById('edit-goal-scores-btn');
+
+if (editGoalBtn) {
+  editGoalBtn.addEventListener('click', function () {
+    const editor = document.getElementById('goal-score-editor');
+
+    if (editor) {
+      editor.style.display = '';
+    }
+
+    editGoalBtn.style.display = 'none';
+  });
+}      
+
 const goalSaveBtn = document.getElementById('goal-score-save');
 if (goalSaveBtn) {
   goalSaveBtn.addEventListener('click', async function () {
