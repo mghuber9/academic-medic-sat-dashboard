@@ -1882,6 +1882,57 @@ if (baselineSaveBtn) {
   });
 }
 
+const goalSaveBtn = document.getElementById('goal-score-save');
+if (goalSaveBtn) {
+  goalSaveBtn.addEventListener('click', async function () {
+    const verbalInput = document.getElementById('goal-verbal-input');
+    const mathInput = document.getElementById('goal-math-input');
+    const status = document.getElementById('login-status');
+
+    const verbal = Number(verbalInput.value);
+    const math = Number(mathInput.value);
+
+    if (isNaN(verbal) || isNaN(math) || verbal < 200 || verbal > 800 || math < 200 || math > 800) {
+      alert('Please enter valid goal scores between 200 and 800.');
+      return;
+    }
+
+    if (!currentStudent || !currentStudent.studentId || !currentStudent.pin) {
+      alert('Please log in before saving goal scores.');
+      return;
+    }
+
+    try {
+      if (status) status.textContent = 'Saving goal scores...';
+
+      const qs = new URLSearchParams({
+        action: 'setGoalScores',
+        student_id: currentStudent.studentId,
+        pin: currentStudent.pin,
+        verbal: verbal,
+        math: math
+      });
+
+      const res = await fetch(apiUrl + '?' + qs.toString());
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        alert(data.error || 'Error saving goal scores.');
+        if (status) status.textContent = data.error || 'Error saving goal scores.';
+        return;
+      }
+
+      if (status) status.textContent = 'Goal scores saved.';
+
+      loadAssignments(currentStudent.studentId, currentStudent.pin);
+
+    } catch (err) {
+      console.error(err);
+      alert('Network error while saving goal scores.');
+      if (status) status.textContent = 'Network error while saving goal scores.';
+    }
+  });
+}      
 
       
       async function markCompleted(assignmentId, li, checkbox){
