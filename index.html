@@ -1839,7 +1839,7 @@ if (baselineSaveBtn) {
         }
       });
 
-      if (window.buildProgress) window.buildProgress();
+      loadAssignments(currentStudent.studentId, currentStudent.pin);
 
     } catch (err) {
       console.error(err);
