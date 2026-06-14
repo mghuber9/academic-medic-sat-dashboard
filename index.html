@@ -1322,7 +1322,7 @@ if (dash) dash.style.display = '';
 // 👇 NEW: hide the login form + login header
 const loginForm = document.getElementById('login-form');
 const loginHeader = document.querySelector('.assignments-header');
-if (loginForm) loginForm.style.display = 'none';
+if (loginForm && !WELCOME_MODE) loginForm.style.display = 'none';
 if (loginHeader) loginHeader.style.display = 'none';
 
 // 👇 NEW: show the "Next 5 Assignments" title
