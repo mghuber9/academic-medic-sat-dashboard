@@ -1781,6 +1781,74 @@ metaEl.textContent = parts.join(' · ');
         });
       }
 
+      const baselineSaveBtn = document.getElementById('baseline-score-save');
+if (baselineSaveBtn) {
+  baselineSaveBtn.addEventListener('click', async function () {
+    const verbalInput = document.getElementById('baseline-verbal-input');
+    const mathInput = document.getElementById('baseline-math-input');
+    const status = document.getElementById('login-status');
+
+    const verbal = Number(verbalInput.value);
+    const math = Number(mathInput.value);
+
+    if (isNaN(verbal) || isNaN(math) || verbal < 200 || verbal > 800 || math < 200 || math > 800) {
+      alert('Please enter valid scores between 200 and 800.');
+      return;
+    }
+
+    if (!currentStudent || !currentStudent.studentId || !currentStudent.pin) {
+      alert('Please log in before saving scores.');
+      return;
+    }
+
+    try {
+      if (status) status.textContent = 'Saving starting scores...';
+
+      const qs = new URLSearchParams({
+        action: 'setBaselineScores',
+        student_id: currentStudent.studentId,
+        pin: currentStudent.pin,
+        verbal: verbal,
+        math: math
+      });
+
+      const res = await fetch(apiUrl + '?' + qs.toString());
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        alert(data.error || 'Error saving scores.');
+        if (status) status.textContent = data.error || 'Error saving scores.';
+        return;
+      }
+
+      if (status) status.textContent = 'Starting scores saved.';
+
+      const rows = document.querySelectorAll('.progress-row');
+      (rows.forEach || Array.prototype.forEach).call(rows, function(row){
+        const label = row.getAttribute('data-label') || '';
+
+        if (label === 'Math') {
+          row.setAttribute('data-baseline', String(math));
+          row.setAttribute('data-current', String(math));
+        } else if (label === 'Verbal') {
+          row.setAttribute('data-baseline', String(verbal));
+          row.setAttribute('data-current', String(verbal));
+        } else if (label === 'Composite') {
+          row.setAttribute('data-baseline', String(math + verbal));
+          row.setAttribute('data-current', String(math + verbal));
+        }
+      });
+
+      if (window.buildProgress) window.buildProgress();
+
+    } catch (err) {
+      console.error(err);
+      alert('Network error while saving scores.');
+      if (status) status.textContent = 'Network error while saving scores.';
+    }
+  });
+}
+
 
       
       async function markCompleted(assignmentId, li, checkbox){
