@@ -1030,10 +1030,14 @@ createMarker(100, goal, "goal");
 if (DEMO_MODE) {
   link.addEventListener("click", function(e){
     e.preventDefault();
-    alert("This is a preview dashboard. Create a free account to open practice modules.");
+
+    if (confirm(
+      "This is a preview dashboard.\n\nCreate a free account to open practice modules.\n\nClick OK to register."
+    )) {
+      window.location.href = "register.html";
+    }
   });
 }
-
 
       row1.append(link);
       card.append(row1);
