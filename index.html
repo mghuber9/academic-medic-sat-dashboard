@@ -1338,7 +1338,8 @@ if (rememberMe && rememberMe.checked) {
 }
           
 if (WELCOME_MODE) {
-  alert('🎉 Welcome to Academic Medic! Your free SAT dashboard is ready.');
+  const welcomeCard = document.getElementById('welcome-card');
+  if (welcomeCard) welcomeCard.style.display = '';
 }
 
 statusEl.textContent = 'Showing your next assignments.';
