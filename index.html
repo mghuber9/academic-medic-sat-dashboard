@@ -1449,6 +1449,23 @@ try {
   const gm = Number(data.goal_math);
   const gv = Number(data.goal_verbal);
 
+  const goalDisplay = document.getElementById('goal-score-display');
+const goalMathInput = document.getElementById('goal-math-input');
+const goalVerbalInput = document.getElementById('goal-verbal-input');
+
+if (goalDisplay) {
+  goalDisplay.textContent =
+    'Verbal: ' + gv + ' · Math: ' + gm;
+}
+
+if (goalMathInput && !isNaN(gm)) {
+  goalMathInput.value = gm;
+}
+
+if (goalVerbalInput && !isNaN(gv)) {
+  goalVerbalInput.value = gv;
+}
+
   (rows.forEach || Array.prototype.forEach).call(rows, function(row){
     const label = row.getAttribute('data-label') || '';
 
