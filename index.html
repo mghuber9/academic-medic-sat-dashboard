@@ -1139,15 +1139,15 @@ if (DEMO_MODE) {
         var rw1 = num(ts["R&W Module 1"]);
         var rw2 = num(ts["R&W Module 2"]);
 
-        // Composite Math: sum of math modules
-        if (m1 != null && m2 != null){
-          ts["Composite Math"] = String(m1 + m2);
-        }
+        // Composite Math: average of math modules
+if (m1 != null && m2 != null){
+  ts["Composite Math"] = String(Math.round((m1 + m2) / 2));
+}
 
-        // Composite Verbal: sum of R&W modules
-        if (rw1 != null && rw2 != null){
-          ts["Composite Verbal"] = String(rw1 + rw2);
-        }
+// Composite Verbal: average of R&W modules
+if (rw1 != null && rw2 != null){
+  ts["Composite Verbal"] = String(Math.round((rw1 + rw2) / 2));
+}
 
         // Overall: Composite Math + Composite Verbal
         var cm = num(ts["Composite Math"]);
