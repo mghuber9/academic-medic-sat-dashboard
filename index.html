@@ -1022,10 +1022,17 @@ createMarker(100, goal, "goal");
       
       var link = el("a", {
   class:"linklike",
-  href:url || "#",
-  target:"_blank",
-  rel:"noopener noreferrer"
-}, "Open Test");
+  href: DEMO_MODE ? "#" : (url || "#"),
+  target: DEMO_MODE ? "" : "_blank",
+  rel: DEMO_MODE ? "" : "noopener noreferrer"
+}, DEMO_MODE ? "Demo Only" : "Open Test");
+
+if (DEMO_MODE) {
+  link.addEventListener("click", function(e){
+    e.preventDefault();
+    alert("This is a preview dashboard. Create a free account to open practice modules.");
+  });
+}
 
 
       row1.append(link);
