@@ -1182,9 +1182,7 @@ if (DEMO_MODE) {
     const ASSIGNMENTS_API_URL = 'https://script.google.com/macros/s/AKfycbzQJBcPfXk2QRRVQpRjIQlcCjxDPXkDRm1wlR7AWoycj_X7eunvsN-T2RWINP8QTGDX/exec';
     const DEMO_MODE = new URLSearchParams(window.location.search).get('demo') === '1';
     const WELCOME_MODE = new URLSearchParams(window.location.search).get('welcome') === '1';
-    if (WELCOME_MODE) {
-  alert('Welcome mode detected');
-}
+    
     const DEMO_EMAIL = 'demo@academicmedic.com';
     const DEMO_PASSWORD = 'D3mo!SAT#8Kp27Lx';
 
@@ -1310,12 +1308,10 @@ if (rememberMe && rememberMe.checked) {
 }
           
 if (WELCOME_MODE) {
-  statusEl.textContent =
-    '🎉 Welcome to Academic Medic! Your free SAT dashboard is ready.';
-} else {
-  statusEl.textContent = 'Showing your next assignments.';
+  alert('🎉 Welcome to Academic Medic! Your free SAT dashboard is ready.');
 }
 
+statusEl.textContent = 'Showing your next assignments.';
 statusEl.className = 'muted'; 
 
 // 👇 NEW: reveal the main dashboard content
