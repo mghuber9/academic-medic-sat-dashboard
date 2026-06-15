@@ -2183,25 +2183,28 @@ reportWindow.document.write(`
 
 <h2>Score Summary</h2>
 
-<p>
-  Verbal: ${baselineVerbal}<br>
-  Math: ${baselineMath}
-</p>
-
-
-<p>
-  Verbal: ${goalVerbal}<br>
-  Math: ${goalMath}
-</p>
-
-<hr>
-
-<h2>Current Scores</h2>
-
-<p>
-  Verbal: ${currentVerbal}<br>
-  Math: ${currentMath}
-</p>
+<table style="border-collapse:collapse; width:100%; max-width:700px;">
+  <tr>
+    <th style="text-align:left; border-bottom:1px solid #ccc; padding:8px;">Score Type</th>
+    <th style="text-align:left; border-bottom:1px solid #ccc; padding:8px;">Verbal</th>
+    <th style="text-align:left; border-bottom:1px solid #ccc; padding:8px;">Math</th>
+  </tr>
+  <tr>
+    <td style="padding:8px;"><strong>Baseline</strong></td>
+    <td style="padding:8px;">${baselineVerbal}</td>
+    <td style="padding:8px;">${baselineMath}</td>
+  </tr>
+  <tr>
+    <td style="padding:8px;"><strong>Current</strong></td>
+    <td style="padding:8px;">${currentVerbal}</td>
+    <td style="padding:8px;">${currentMath}</td>
+  </tr>
+  <tr>
+    <td style="padding:8px;"><strong>Goal</strong></td>
+    <td style="padding:8px;">${goalVerbal}</td>
+    <td style="padding:8px;">${goalMath}</td>
+  </tr>
+</table>
 
 <hr>
 
