@@ -2142,7 +2142,10 @@ const mathGain =
   Number(currentMath) - Number(baselineMath);
 
 const totalGain =
-  verbalGain + mathGain;    
+  verbalGain + mathGain; 
+
+const plannedDateText =
+  document.getElementById('sat-planned-date')?.textContent?.trim() || 'Not set';    
 
 reportWindow.document.write(`
   <html>
@@ -2154,6 +2157,10 @@ reportWindow.document.write(`
 
     <p><strong>Student:</strong> ${studentName}</p>
 <p><strong>Date Generated:</strong> ${generatedDate}</p>
+
+<h2>Planned SAT Date</h2>
+
+<p>${plannedDateText}</p>
 
 <h2>Baseline Scores</h2>
 
