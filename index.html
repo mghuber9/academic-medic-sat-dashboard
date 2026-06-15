@@ -2117,6 +2117,18 @@ if (progressReportBtn) {
 
     const generatedDate = new Date().toLocaleDateString();
 
+    const baselineVerbal =
+  document.querySelector('.progress-row[data-label="Verbal"]')?.getAttribute('data-baseline') || '—';
+
+const baselineMath =
+  document.querySelector('.progress-row[data-label="Math"]')?.getAttribute('data-baseline') || '—';
+
+const goalVerbal =
+  document.querySelector('.progress-row[data-label="Verbal"]')?.getAttribute('data-goal') || '—';
+
+const goalMath =
+  document.querySelector('.progress-row[data-label="Math"]')?.getAttribute('data-goal') || '—';
+
 reportWindow.document.write(`
   <html>
   <head>
@@ -2128,9 +2140,22 @@ reportWindow.document.write(`
     <p><strong>Student:</strong> ${studentName}</p>
 <p><strong>Date Generated:</strong> ${generatedDate}</p>
 
-<p>(coming soon)</p>
+<h2>Baseline Scores</h2>
 
-    <p>(coming soon)</p>
+<p>
+  Verbal: ${baselineVerbal}<br>
+  Math: ${baselineMath}
+</p>
+
+<h2>Goal Scores</h2>
+
+<p>
+  Verbal: ${goalVerbal}<br>
+  Math: ${goalMath}
+</p>
+
+<p>(more report sections coming soon)</p>
+
   </body>
   </html>
 `);
