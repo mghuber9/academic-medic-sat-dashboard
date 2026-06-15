@@ -2209,8 +2209,16 @@ reportWindow.document.write(`
 ">
   SAT Progress Summary
 </p>
-    <p><strong>Student:</strong> ${studentName}</p>
-<p><strong>Date Generated:</strong> ${generatedDate}</p>
+    <table style="margin-bottom:20px;">
+  <tr>
+    <td style="padding:4px 16px 4px 0;"><strong>Student:</strong></td>
+    <td style="padding:4px 0;">${studentName}</td>
+  </tr>
+  <tr>
+    <td style="padding:4px 16px 4px 0;"><strong>Date Generated:</strong></td>
+    <td style="padding:4px 0;">${generatedDate}</td>
+  </tr>
+</table>
 
 <h2>Planned SAT Date</h2>
 
