@@ -740,101 +740,100 @@
     </div>
   </section>
 
-  <!-- Upcoming SAT dates (from Google Sheet) + student's planned date -->
-  <section class="countdown-section">
-    <div class="countdown-inner">
+<!-- Upcoming SAT dates (from Google Sheet) + student's planned date -->
+<section class="countdown-section">
+  <div class="countdown-inner">
 
-  <div style="
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:32px;
-    align-items:start;
-    max-width:900px;
-    margin:0 auto;
-  ">
+    <div style="
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:32px;
+      align-items:start;
+      max-width:900px;
+      margin:0 auto;
+    ">
 
-  <div>
-      <div class="countdown-title">Upcoming SAT Test Dates</div>
-      <div id="sat-upcoming-list"></div>
+      <div>
+        <div class="countdown-title">Upcoming SAT Test Dates</div>
+        <div id="sat-upcoming-list"></div>
 
-      <div class="countdown-sub" id="sat-planned-line" style="margin-top:8px;">
-        Your planned test date:
-        <span id="sat-planned-date" class="countdown-days">Not set yet</span>
-        <br>
-        <label for="planned-date-input" style="font-size:0.9em;">Change date:</label>
-        <select id="planned-date-input" style="margin-left:4px; font-size:0.9em;">
-          <option value="">Select a test date…</option>
-        </select>
-        <button type="button" id="planned-date-save" style="margin-left:4px; font-size:0.9em;">Save</button>
+        <div class="countdown-sub" id="sat-planned-line" style="margin-top:8px;">
+          Your planned test date:
+          <span id="sat-planned-date" class="countdown-days">Not set yet</span>
+          <br>
+          <label for="planned-date-input" style="font-size:0.9em;">Change date:</label>
+          <select id="planned-date-input" style="margin-left:4px; font-size:0.9em;">
+            <option value="">Select a test date…</option>
+          </select>
+          <button type="button" id="planned-date-save" style="margin-left:4px; font-size:0.9em;">Save</button>
+        </div>
+      </div>
 
-  </div>
+      <div>
+        <div id="baseline-score-entry" style="margin-top:14px;">
+          <strong>Starting SAT Scores</strong><br>
+          <span style="font-size:0.9em; color:#5E667D;">
+            Enter your most recent SAT or PSAT-based estimate.
+          </span>
+          <br>
+          <label for="baseline-verbal-input" style="font-size:0.9em;">Verbal:</label>
+          <input type="number" id="baseline-verbal-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
 
-  <div>        
+          <label for="baseline-math-input" style="font-size:0.9em;">Math:</label>
+          <input type="number" id="baseline-math-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
 
-<div id="baseline-score-entry" style="margin-top:14px;">
-  <strong>Starting SAT Scores</strong><br>
-  <span style="font-size:0.9em; color:#5E667D;">
-    Enter your most recent SAT or PSAT-based estimate.
-  </span>
-  <br>
-  <label for="baseline-verbal-input" style="font-size:0.9em;">Verbal:</label>
-  <input type="number" id="baseline-verbal-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
-
-  <label for="baseline-math-input" style="font-size:0.9em;">Math:</label>
-  <input type="number" id="baseline-math-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
-
-  <button type="button" id="baseline-score-save" style="margin-left:4px; font-size:0.9em;">Save Scores</button>
-</div>
+          <button type="button" id="baseline-score-save" style="margin-left:4px; font-size:0.9em;">Save Scores</button>
+        </div>
 
         <div id="goal-score-entry" style="margin-top:14px;">
-  <strong>Target SAT Scores</strong><br>
+          <strong>Target SAT Scores</strong><br>
 
-  <span
-    id="goal-score-display"
-    style="font-size:0.9em; color:#5E667D;">
-    Verbal: 700 · Math: 700
-  </span>
+          <span
+            id="goal-score-display"
+            style="font-size:0.9em; color:#5E667D;">
+            Verbal: 700 · Math: 700
+          </span>
 
-  <br>
+          <br>
 
-  <button
-    type="button"
-    id="edit-goal-scores-btn"
-    style="margin-top:6px; font-size:0.9em;">
-    Edit Goal Scores
-  </button>
+          <button
+            type="button"
+            id="edit-goal-scores-btn"
+            style="margin-top:6px; font-size:0.9em;">
+            Edit Goal Scores
+          </button>
 
-  <div id="goal-score-editor" style="display:none; margin-top:8px;">
-    <label for="goal-verbal-input" style="font-size:0.9em;">Verbal:</label>
-    <input type="number" id="goal-verbal-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
+          <div id="goal-score-editor" style="display:none; margin-top:8px;">
+            <label for="goal-verbal-input" style="font-size:0.9em;">Verbal:</label>
+            <input type="number" id="goal-verbal-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
 
-    <label for="goal-math-input" style="font-size:0.9em;">Math:</label>
-    <input type="number" id="goal-math-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
+            <label for="goal-math-input" style="font-size:0.9em;">Math:</label>
+            <input type="number" id="goal-math-input" min="200" max="800" step="10" style="width:70px; margin:6px 8px 0 4px;">
 
-    <button type="button" id="goal-score-save" style="margin-left:4px; font-size:0.9em;">
-      Save Goals
-    </button>
-  </div>
-</div>
+            <button type="button" id="goal-score-save" style="margin-left:4px; font-size:0.9em;">
+              Save Goals
+            </button>
+          </div>
+        </div>
 
         <div id="progress-report-entry" style="margin-top:14px;">
-  <strong>Progress Report</strong><br>
+          <strong>Progress Report</strong><br>
 
-  <span style="font-size:0.9em; color:#5E667D;">
-    Generate a summary of your SAT progress.
-  </span>
+          <span style="font-size:0.9em; color:#5E667D;">
+            Generate a summary of your SAT progress.
+          </span>
 
-  <br>
+          <br>
 
-  <button
-    type="button"
-    id="generate-progress-report-btn"
-    style="margin-top:6px; font-size:0.9em;">
-    Generate Progress Report
-  </button>
-</div>
+          <button
+            type="button"
+            id="generate-progress-report-btn"
+            style="margin-top:6px; font-size:0.9em;">
+            Generate Progress Report
+          </button>
+        </div>
+      </div>
 
-            </div>
     </div>
   </div>
 </section>
