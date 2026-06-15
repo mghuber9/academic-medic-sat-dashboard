@@ -2147,14 +2147,14 @@ const totalGain =
 const plannedDateRaw =
   document.getElementById('sat-planned-date')?.textContent?.trim() || 'Not set';
 
+const plannedDateIso =
+  document.getElementById('planned-date-input')?.value || '';
+
 let plannedDateText = plannedDateRaw;
 
 if (plannedDateRaw !== 'Not set') {
-  const plannedDateObj = new Date(plannedDateRaw);
+  const plannedDateObj = new Date(plannedDateIso || plannedDateRaw);
   const today = new Date();
-
-  today.setHours(0, 0, 0, 0);
-  plannedDateObj.setHours(0, 0, 0, 0);
 
   const daysAway = Math.ceil((plannedDateObj - today) / (1000 * 60 * 60 * 24));
 
@@ -2162,7 +2162,7 @@ if (plannedDateRaw !== 'Not set') {
     plannedDateText =
       plannedDateRaw + ' • ' + daysAway + ' day' + (daysAway === 1 ? '' : 's') + ' away';
   }
-} 
+}
 
 reportWindow.document.write(`
   <html>
