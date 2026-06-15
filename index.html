@@ -2129,6 +2129,12 @@ const goalVerbal =
 const goalMath =
   document.querySelector('.progress-row[data-label="Math"]')?.getAttribute('data-goal') || '—';
 
+const currentVerbal =
+  document.querySelector('.progress-row[data-label="Verbal"]')?.getAttribute('data-current') || '—';
+
+const currentMath =
+  document.querySelector('.progress-row[data-label="Math"]')?.getAttribute('data-current') || '—';
+
 reportWindow.document.write(`
   <html>
   <head>
@@ -2152,6 +2158,13 @@ reportWindow.document.write(`
 <p>
   Verbal: ${goalVerbal}<br>
   Math: ${goalMath}
+</p>
+
+<h2>Current Scores</h2>
+
+<p>
+  Verbal: ${currentVerbal}<br>
+  Math: ${currentMath}
 </p>
 
 <p>(more report sections coming soon)</p>
