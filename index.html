@@ -2210,15 +2210,24 @@ reportWindow.document.write(`
 
 <h2>Progress Toward Goal</h2>
 
-<p>
-  Verbal: +${verbalGain} points from baseline<br>
-  Math: +${mathGain} points from baseline
-</p>
-
-<p>
-  <strong>Total Improvement:</strong>
-  +${totalGain} points
-</p>
+<table style="border-collapse:collapse; width:100%; max-width:500px;">
+  <tr>
+    <th style="text-align:left; border-bottom:1px solid #ccc; padding:8px;">Area</th>
+    <th style="text-align:left; border-bottom:1px solid #ccc; padding:8px;">Improvement</th>
+  </tr>
+  <tr>
+    <td style="padding:8px;"><strong>Verbal</strong></td>
+    <td style="padding:8px;">+${verbalGain}</td>
+  </tr>
+  <tr>
+    <td style="padding:8px;"><strong>Math</strong></td>
+    <td style="padding:8px;">+${mathGain}</td>
+  </tr>
+  <tr>
+    <td style="padding:8px;"><strong>Total</strong></td>
+    <td style="padding:8px;"><strong>+${totalGain}</strong></td>
+  </tr>
+</table>
 
 <p>(more report sections coming soon)</p>
 
