@@ -2115,6 +2115,8 @@ if (progressReportBtn) {
     const studentName =
   window.studentDisplayName || 'Student';
 
+    const generatedDate = new Date().toLocaleDateString();
+
 reportWindow.document.write(`
   <html>
   <head>
@@ -2124,6 +2126,9 @@ reportWindow.document.write(`
     <h1>Academic Medic Progress Report</h1>
 
     <p><strong>Student:</strong> ${studentName}</p>
+<p><strong>Date Generated:</strong> ${generatedDate}</p>
+
+<p>(coming soon)</p>
 
     <p>(coming soon)</p>
   </body>
