@@ -2135,6 +2135,15 @@ const currentVerbal =
 const currentMath =
   document.querySelector('.progress-row[data-label="Math"]')?.getAttribute('data-current') || '—';
 
+const verbalGain =
+  Number(currentVerbal) - Number(baselineVerbal);
+
+const mathGain =
+  Number(currentMath) - Number(baselineMath);
+
+const totalGain =
+  verbalGain + mathGain;    
+
 reportWindow.document.write(`
   <html>
   <head>
@@ -2165,6 +2174,18 @@ reportWindow.document.write(`
 <p>
   Verbal: ${currentVerbal}<br>
   Math: ${currentMath}
+</p>
+
+<h2>Progress Toward Goal</h2>
+
+<p>
+  Verbal: +${verbalGain} points from baseline<br>
+  Math: +${mathGain} points from baseline
+</p>
+
+<p>
+  <strong>Total Improvement:</strong>
+  +${totalGain} points
 </p>
 
 <p>(more report sections coming soon)</p>
