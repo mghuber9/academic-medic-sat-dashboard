@@ -2104,7 +2104,29 @@ try {
 }
   });
 }
-      
+
+const progressReportBtn = document.getElementById('generate-progress-report-btn');
+
+if (progressReportBtn) {
+  progressReportBtn.addEventListener('click', function () {
+
+    const reportWindow = window.open('', '_blank');
+
+    reportWindow.document.write(`
+      <html>
+      <head>
+        <title>Academic Medic Progress Report</title>
+      </head>
+      <body style="font-family:Arial,sans-serif;padding:40px;">
+        <h1>Academic Medic Progress Report</h1>
+        <p>(coming soon)</p>
+      </body>
+      </html>
+    `);
+
+    reportWindow.document.close();
+  });
+}
 
 const changePasswordBtn = document.getElementById('change-password-btn');
 
