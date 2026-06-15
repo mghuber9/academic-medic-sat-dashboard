@@ -743,6 +743,17 @@
   <!-- Upcoming SAT dates (from Google Sheet) + student's planned date -->
   <section class="countdown-section">
     <div class="countdown-inner">
+
+  <div style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    align-items:start;
+    max-width:900px;
+    margin:0 auto;
+  ">
+
+  <div>
       <div class="countdown-title">Upcoming SAT Test Dates</div>
       <div id="sat-upcoming-list"></div>
 
@@ -755,6 +766,10 @@
           <option value="">Select a test date…</option>
         </select>
         <button type="button" id="planned-date-save" style="margin-left:4px; font-size:0.9em;">Save</button>
+
+  </div>
+
+  <div>        
 
 <div id="baseline-score-entry" style="margin-top:14px;">
   <strong>Starting SAT Scores</strong><br>
@@ -819,9 +834,10 @@
   </button>
 </div>
 
-      </div>
+            </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Random focus tips -->
   <section class="focus-strip">
