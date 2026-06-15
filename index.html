@@ -1816,6 +1816,7 @@ metaEl.textContent = parts.join(' · ');
         if (item.reg_human) {
           const regLine = document.createElement('div');
           regLine.className = 'countdown-sub';
+          regLine.style.marginBottom = '10px';
           regLine.textContent = 'Registration deadline: ' + item.reg_human;
           listEl.appendChild(regLine);
         }
