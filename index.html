@@ -2112,18 +2112,23 @@ if (progressReportBtn) {
 
     const reportWindow = window.open('', '_blank');
 
-    reportWindow.document.write(`
-      <html>
-      <head>
-        <title>Academic Medic Progress Report</title>
-      </head>
-      <body style="font-family:Arial,sans-serif;padding:40px;">
-        <h1>Academic Medic Progress Report</h1>
-        <p>(coming soon)</p>
-      </body>
-      </html>
-    `);
+    const studentName =
+  window.studentDisplayName || 'Student';
 
+reportWindow.document.write(`
+  <html>
+  <head>
+    <title>Academic Medic Progress Report</title>
+  </head>
+  <body style="font-family:Arial,sans-serif;padding:40px;">
+    <h1>Academic Medic Progress Report</h1>
+
+    <p><strong>Student:</strong> ${studentName}</p>
+
+    <p>(coming soon)</p>
+  </body>
+  </html>
+`);
     reportWindow.document.close();
   });
 }
