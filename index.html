@@ -2191,10 +2191,18 @@ reportWindow.document.write(`
   <html>
   <head>
     <title>Academic Medic Progress Report</title>
+
+    <style>
+      @media print {
+        .print-button {
+          display:none !important;
+        }
+      }
+    </style>
   </head>
   <body style="font-family:Arial,sans-serif;padding:40px;">
 
-<div style="text-align:right; margin-bottom:10px;">
+<div class="print-button" style="text-align:right; margin-bottom:10px;">
   <button
     onclick="window.print()"
     style="
